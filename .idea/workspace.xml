@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85d474d7-4f2e-41ee-9588-6a692a9d6cba" name="Default Changelist" comment="" />
+    <list default="true" id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="修改">
+      <change afterPath="$PROJECT_DIR$/logs/system-error.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/system-info.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/user-login.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/META-INF/PAGE_Admin.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Admin/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/JiasPageServeAdminApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/controller/AdminController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/controller/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/controller/RedisController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/domain/Admin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/domain/Markdown.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/domain/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/mapper/LoginMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/mapper/MarkdownMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/mapper/UserMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/ILoginService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/IMarkdownService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/IUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/impl/LoginServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/impl/MarkdownImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Admin/target/classes/com/jias/page/service/impl/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/META-INF/PAGE_Client.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/markdownController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/controller/markdownController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/Markdown.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/Markdown.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/domain/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/LoginServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/LoginServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/MarkdownImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/MarkdownImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Client/target/classes/com/jias/page/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/Markdown.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/Markdown.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/domain/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/utils/redisUtil/RedisUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/target/classes/com/jias/page/utils/redisUtil/RedisUtil.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,21 +56,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Maven/apache-maven-3.6.1" />
-        <option name="userSettingsFile" value="D:\Maven\apache-maven-3.6.1\settings.xml" />
-      </MavenGeneralSettings>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+      </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectId" id="22gfuEVxKo6QobPVBKQ6JLHAN4m" />
+  <component name="ProjectId" id="23US3TUKJ8568zJWbKzpZyNpyEt" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -40,26 +79,41 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Spring Boot.JiasPageServeClientApplication">
+    <configuration name="JiasPageServeAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="PAGE-Admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jias.page.JiasPageServeAdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JiasPageServeClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="PAGE-Client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jias.page.JiasPageServeClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="85d474d7-4f2e-41ee-9588-6a692a9d6cba" name="Default Changelist" comment="" />
-      <created>1640264371403</created>
+      <changelist id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="" />
+      <created>1641786972415</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1640264371403</updated>
-      <workItem from="1640264372668" duration="298000" />
+      <updated>1641786972415</updated>
+      <workItem from="1641786975503" duration="629000" />
+      <workItem from="1641803837434" duration="7000" />
+      <workItem from="1641807426393" duration="1879000" />
+      <workItem from="1642994011947" duration="608000" />
+      <workItem from="1642995578867" duration="153000" />
+      <workItem from="1642995734382" duration="75000" />
+      <workItem from="1642995811284" duration="298000" />
+      <workItem from="1642996111176" duration="606000" />
     </task>
-    <task id="LOCAL-00001" summary="项目修改">
-      <created>1640264512948</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1640264512948</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -70,14 +124,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="项目修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目修改" />
+    <MESSAGE value="修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改" />
   </component>
 </project>
