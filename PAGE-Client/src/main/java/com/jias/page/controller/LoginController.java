@@ -48,4 +48,9 @@ public class LoginController {
         }
     }
 
+    @PostMapping("/")
+    public String index() {
+        return "index";
+    }
+
 }

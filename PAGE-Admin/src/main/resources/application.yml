@@ -4,11 +4,6 @@ server:
     servlet:
         context-path: /admin
 
-# nacos配置
-nacos:
-    config:
-        server-addr: 127.0.0.1:8848
-
 spring:
     # 环境设置：dev、test、prod
     profiles:

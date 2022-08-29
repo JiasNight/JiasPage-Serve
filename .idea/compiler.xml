@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="PAGE-Common" />
-        <module name="PAGE-Admin" />
         <module name="PAGE-Client" />
+        <module name="PAGE-Admin" />
       </profile>
     </annotationProcessing>
   </component>
