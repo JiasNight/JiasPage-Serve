@@ -2,8 +2,8 @@ package com.jias.page.controller;
 
 
 import com.jias.page.service.ILoginService;
-import com.jias.page.utils.imgUtil.ValidateCode;
 import com.jias.page.utils.resultUtil.Result;
+import com.jias.page.utils.verifyUtil.ValidateCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,38 +59,34 @@ public class LoginController {
 
     @ApiOperation(value = "登录验证码", notes = "登录验证码")
     @GetMapping("/validateCode")
-    public Result getCode(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-        try {
-            response.setContentType("image/jpeg");
-            // 禁止图像缓存。
-            response.setHeader("Pragma", "no-cache");
-            response.setHeader("Cache-Control", "no-cache");
-            response.setDateHeader("Expires", 0);
+    public Result getCode(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.setContentType("image/jpeg");
+        // 禁止图像缓存。
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
 
 
-            ValidateCode vCode = new ValidateCode();
-            // 将验证码存入Session
-            session.setAttribute("imageCode", vCode.createImage()[0]);
+        ValidateCode vCode = new ValidateCode();
+        // 将验证码存入Session
+        session.setAttribute("imageCode", vCode.createImage()[0]);
 
-            // 将图片转正base64
-            BufferedImage image = (BufferedImage) vCode.createImage()[1];
-            // 转base64
-            Base64.Encoder encoder = Base64.getEncoder();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(); // io流
-            ImageIO.write(image, "png", baos); // 写入流中
-            byte[] bytes = baos.toByteArray(); // 转换成字节
-            String pngBase64 =  encoder.encodeToString(bytes).trim(); // 转换成base64串
-            // 删除 \r\n
-            pngBase64 = pngBase64.replaceAll("\n", "").replaceAll("\r", "");
+        // 将图片转正base64
+        BufferedImage image = (BufferedImage) vCode.createImage()[1];
+        // 转base64
+        Base64.Encoder encoder = Base64.getEncoder();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(); // io流
+        ImageIO.write(image, "png", baos); // 写入流中
+        byte[] bytes = baos.toByteArray(); // 转换成字节
+        String pngBase64 = encoder.encodeToString(bytes).trim(); // 转换成base64串
+        // 删除 \r\n
+        pngBase64 = pngBase64.replaceAll("\n", "").replaceAll("\r", "");
 
-            Map map = new HashMap<>();
-            map.put("base64", "data:image/png;base64,"+ pngBase64);
+        Map map = new HashMap<>();
+        map.put("base64", "data:image/png;base64," + pngBase64);
 //            map.put("validateCode", vCode.createImage()[0]);
 
-            return Result.success(map);
-        } catch (Exception e) {
-            return Result.failure(e.toString());
-        }
+        return Result.success(map);
     }
 
 }
