@@ -21,7 +21,8 @@ public class Result {
     private Object data;
 
     // 构造器私有
-    private Result(){}
+    private Result() {
+    }
 
     public Result(Boolean success, ResultEnum resultEnum, String timestamp) {
         this.success = success;
@@ -84,6 +85,16 @@ public class Result {
         Result result = new Result();
         result.setSuccess(false);
         result.setResultEnum(resultEnum);
+        result.setTimestamp(timeFormat());
+        return result;
+    }
+
+    // 返回失败
+    public static Result failure(int code, String message) {
+        Result result = new Result();
+        result.setSuccess(false);
+        result.setCode(code);
+        result.setMessage(message);
         result.setTimestamp(timeFormat());
         return result;
     }

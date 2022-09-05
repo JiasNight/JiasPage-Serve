@@ -1,6 +1,5 @@
 package com.jias.page.service.impl;
 
-import com.alibaba.nacos.common.util.UuidUtil;
 import com.jias.page.domain.User;
 import com.jias.page.mapper.LoginMapper;
 import com.jias.page.service.ILoginService;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author JIAS
@@ -22,6 +22,7 @@ public class LoginServiceImpl implements ILoginService {
 
     /**
      * 用户是否登录
+     *
      * @param userName 用户名
      * @param password 密码
      * @return boolean
@@ -40,6 +41,7 @@ public class LoginServiceImpl implements ILoginService {
 
     /**
      * 用户添加
+     *
      * @param userName 用户名
      * @param password 密码
      * @return boolean
@@ -48,7 +50,7 @@ public class LoginServiceImpl implements ILoginService {
     public boolean userAdd(String userName, String password) {
         try {
             User user = new User();
-            user.setUserId(UuidUtil.generateUuid());
+            user.setUserId(UUID.randomUUID().toString());
             user.setUserName(userName);
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             String userPassword = bCryptPasswordEncoder.encode(password);
