@@ -1,6 +1,5 @@
 package com.jias.page.service.impl;
 
-import com.alibaba.nacos.common.util.UuidUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jias.page.domain.User;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author JIAS
@@ -24,6 +24,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 获取用户信息列表
+     *
      * @param page 分页
      * @return 用户信息列表
      */
@@ -39,13 +40,14 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 添加用户信息
+     *
      * @param user 用户实体
      * @return boolean
      */
     @Override
     public boolean addUserInfo(User user) {
         try {
-            user.setUserId(UuidUtil.generateUuid());
+            user.setUserId(UUID.randomUUID().toString());
             String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
             user.setCreateTime(time);
             user.setUpdateTime(time);
@@ -67,6 +69,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 删除用户
+     *
      * @param userId 用户id
      * @return boolean
      */
@@ -90,6 +93,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 修改用户
+     *
      * @param user 用户实体
      * @return boolean
      */
@@ -110,6 +114,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 查询用户信息
+     *
      * @param userId 用户id
      * @return 用户信息
      */

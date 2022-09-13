@@ -1,4 +1,7 @@
 # 公共配置部分
 
-
+logging:
+  level:
+    com:
+      jias: debug
 
