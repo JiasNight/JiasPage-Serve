@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="aop">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SpringWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SpringWebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SwaggerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/intercept/RequestIntercept.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/intercept/RequestIntercept.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/AesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/AesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/system-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/system-error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/system-info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/system-info.log" afterDir="false" />
-    </list>
+    <list default="true" id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="aes加解密" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
