@@ -25,9 +25,19 @@ public class SpringWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/static/**").addResourceLocations("classpath:/static/");
     }
 
+    /**
+     * 配置拦截规则与注入拦截器
+     *
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(requestIntercept);
+        // addPathPattern 添加拦截规则 /** 拦截所有包括静态资源
+        // excludePathPattern 排除拦截规则 所以我们需要放开静态资源的拦截
+        registry.addInterceptor(requestIntercept)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/user/validateCode")
+                .excludePathPatterns("/css/**", "/fonts/**", "/images/**", "/js/**");
     }
 }
 

@@ -4,27 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="加密和验证码">
-      <change afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/exception/GlobalException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/exception/ServiceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/intercept/RequestIntercept.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="537c2158-fc48-43bd-97a4-373a56e458f9" name="Default Changelist" comment="aop">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Admin/src/main/java/com/jias/page/service/impl/LoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Admin/src/main/java/com/jias/page/service/impl/LoginServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Admin/src/main/java/com/jias/page/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Admin/src/main/java/com/jias/page/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SpringWebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SpringWebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/domain/Admin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/domain/Markdown.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/domain/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/GenerateKeyPairConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/GenerateKeyPairConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/RsaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/RsaUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/resultUtil/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/resultUtil/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/config/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/intercept/RequestIntercept.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/intercept/RequestIntercept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/AesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/PAGE-Common/src/main/java/com/jias/page/utils/cryptionUtil/AesUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/system-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/system-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/system-info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/system-info.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +70,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/PAGE-Common/src" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
