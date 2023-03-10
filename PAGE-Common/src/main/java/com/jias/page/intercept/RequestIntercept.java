@@ -2,8 +2,10 @@ package com.jias.page.intercept;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jias.page.utils.cryptionUtil.AesUtil;
+import com.jias.page.utils.cryptionUtil.AESUtil;
+import com.jias.page.utils.redisUtil.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +19,10 @@ import java.io.InputStreamReader;
 @Component
 @Slf4j
 public class RequestIntercept implements HandlerInterceptor {
+
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * //三个方法的运行顺序为    preHandle -> postHandle -> afterCompletion
      * //如果preHandle返回值为false，三个方法仅运行preHandle
@@ -54,7 +60,7 @@ public class RequestIntercept implements HandlerInterceptor {
         String data = jsonObject.getString("data");
         String aesKey = jsonObject.getString("aesKey");
         String publicKey = jsonObject.getString("publicKey");
-        String content = AesUtil.decrypt(aesKey, "3nuQF6e4LCyt48GX");
+        String content = AESUtil.decrypt(data, redisUtil.get("aesKey").toString());
         System.out.println(content);
         return true;
     }

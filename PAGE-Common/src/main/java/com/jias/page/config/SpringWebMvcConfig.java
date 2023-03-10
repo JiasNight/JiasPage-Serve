@@ -37,6 +37,7 @@ public class SpringWebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(requestIntercept)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/user/validateCode")
+                .excludePathPatterns("/system/aesKey")
                 .excludePathPatterns("/css/**", "/fonts/**", "/images/**", "/js/**");
     }
 }
