@@ -36,32 +36,32 @@ public class RequestIntercept implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.debug(request.getMethod());
-        log.debug(request.getRequestURI());
-        StringBuffer url = request.getRequestURL();
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String line = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        log.info("请求地址：{}, 请求参数：{}", url, sb.toString());
-        JSONObject jsonObject = JSON.parseObject(sb.toString());
-        System.out.println(jsonObject.getString("aesKey"));
-        String data = jsonObject.getString("data");
-        String aesKey = jsonObject.getString("aesKey");
-        String publicKey = jsonObject.getString("publicKey");
-        String content = AESUtil.decrypt(data, redisUtil.get("aesKey").toString());
-        System.out.println(content);
+//        log.debug(request.getMethod());
+//        log.debug(request.getRequestURI());
+//        StringBuffer url = request.getRequestURL();
+//        BufferedReader br = null;
+//        try {
+//            br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String line = null;
+//        StringBuilder sb = new StringBuilder();
+//        try {
+//            while ((line = br.readLine()) != null) {
+//                sb.append(line);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+////        log.info("请求地址：{}, 请求参数：{}", url, sb.toString());
+//        JSONObject jsonObject = JSON.parseObject(sb.toString());
+//        System.out.println(jsonObject.getString("aesKey"));
+//        String data = jsonObject.getString("data");
+//        String aesKey = jsonObject.getString("aesKey");
+//        String publicKey = jsonObject.getString("publicKey");
+//        String content = AESUtil.decrypt(data, redisUtil.get("aesKey").toString());
+//        System.out.println(content);
         return true;
     }
 
