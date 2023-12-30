@@ -47,20 +47,17 @@ public class LoginServiceImpl implements ILoginService {
 
         // 把token存到redis中
         redisUtil.set("pageToken", token, 60);
-        String userId = userList.get("userId").toString();
-        List users = loginMapper.getUserInfo(userId);
-        System.out.println(users.get(0));
         signInInfo.put("isSignIn", "1");
-        signInInfo.put("userInfo", users.get(0));
+        signInInfo.put("token", token);
         return signInInfo;
       } else {
         signInInfo.put("isSignIn", "0");
-        signInInfo.put("userInfo", null);
+        signInInfo.put("token", null);
         return signInInfo;
       }
     } catch (Exception e) {
       signInInfo.put("isSignIn", "0");
-      signInInfo.put("userInfo", null);
+      signInInfo.put("token", null);
       return signInInfo;
     }
   }

@@ -29,15 +29,16 @@ public class LoginController {
 
   @Autowired RedisUtil redisUtil;
 
-  @ApiOperation(value = "用户登陆", notes = "用户登陆")
+  @ApiOperation(value = "后台用户登陆", notes = "后台用户登陆")
   @PostMapping("/login")
   public Result singIn(
       @RequestParam("userName") String userName, @RequestParam("password") String password) {
     try {
       Map<String, String> signInInfo = loginService.userIsSignIn(userName, password);
       if (signInInfo.get("isSignIn").toString().equals("1")) {
-        System.out.println("jinglaisd ");
-        return Result.success(signInInfo.get("userInfo"));
+        Map tMap = new HashMap();
+        tMap.put("token", signInInfo.get("token"));
+        return Result.success(tMap);
       } else {
         return Result.failure("登陆失败");
       }
@@ -57,6 +58,20 @@ public class LoginController {
       } else {
         return Result.failure("注册失败");
       }
+    } catch (Exception e) {
+      return Result.failure(e.toString());
+    }
+  }
+
+  @ApiOperation(value = "获取登录用户信息", notes = "获取登录用户信息")
+  @GetMapping("/info")
+  public Result getUserInfo() {
+    try {
+      Map userInfo = new HashMap();
+      userInfo.put("userName", "admin");
+      userInfo.put("userNick", "管理员");
+      userInfo.put("userId", "tBTE8c4157XLITEMUrB1ayFuvWQH1cq8");
+      return Result.success(userInfo);
     } catch (Exception e) {
       return Result.failure(e.toString());
     }
