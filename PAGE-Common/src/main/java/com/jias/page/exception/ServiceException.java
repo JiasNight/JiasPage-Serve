@@ -1,20 +1,30 @@
 package com.jias.page.exception;
 
-import lombok.Data;
-
-@Data
 public class ServiceException extends RuntimeException {
 
-    private int code;
+  private int code;
 
-    private String message;
+  private String message;
 
-    private ServiceException(int code, String message) {
-        this.code = code;
-        this.message = message;
-    }
+  private ServiceException(int code, String message) {
+    this.code = code;
+    this.message = message;
+  }
 
-    public static void throwBiz(int code, String message) {
-        throw new ServiceException(code, message);
-    }
+  public int getCode() {
+    return code;
+  }
+
+  public void setCode(int code) {
+    this.code = code;
+  }
+
+  @Override
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

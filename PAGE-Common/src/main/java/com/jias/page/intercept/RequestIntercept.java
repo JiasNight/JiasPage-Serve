@@ -1,10 +1,6 @@
 package com.jias.page.intercept;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.jias.page.utils.cryptionUtil.AESUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -12,12 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 @Component
-@Slf4j
 public class RequestIntercept implements HandlerInterceptor {
 
   @Autowired private RedisUtil redisUtil;
