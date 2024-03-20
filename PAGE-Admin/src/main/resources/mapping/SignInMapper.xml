@@ -3,8 +3,8 @@
 <mapper namespace="com.jias.page.mapper.SignInMapper">
 
     <!-- 用户登陆 -->
-    <select id="userIsSignIn" parameterType="string" resultType="map">
-        select user_id as userId, user_password as userPassword
+    <select id="userIsSignIn" parameterType="string" resultType="com.jias.page.domain.User">
+        select *
         from sys_users
         where user_name = #{userName};
     </select>

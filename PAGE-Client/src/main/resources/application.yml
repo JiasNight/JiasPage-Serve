@@ -1,7 +1,7 @@
 server:
-  port: 8888
+  port: 9998
   servlet:
-    context-path: /page
+    context-path: /client
 
 spring:
   # 环境设置：dev、test、prod

@@ -1,12 +1,12 @@
 server:
-  port: 9999
+  port: 9901
   servlet:
-    context-path: /admin
+    context-path: /auth
 
 spring:
   application:
     # 应用名称
-    name: page-admin
+    name: page-auth
   # 环境设置：dev、test、prod
   profiles:
     active: dev
@@ -57,22 +57,10 @@ mybatis-plus:
       # 删除后
       logic-delete-value: 1
 
-# 是否开启加密传输模式
-net-transfer:
-  #  请求加密
-  request-safe: false
-  #  响应加密
-  response-safe: false
-
-# 默认AES的key
-cryption:
-  aes-key: def009A1bcO538JK
-
-
-# 日志
 logging:
   file:
-    path: logs/admin
+    path: logs/client
   level:
     com.jias.page: debug
+
 

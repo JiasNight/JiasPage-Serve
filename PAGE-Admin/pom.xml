@@ -17,6 +17,10 @@
             <groupId>com.jias.page</groupId>
             <artifactId>PAGE-Common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.jias.page</groupId>
+            <artifactId>PAGE-Auth</artifactId>
+        </dependency>
 
     </dependencies>
 

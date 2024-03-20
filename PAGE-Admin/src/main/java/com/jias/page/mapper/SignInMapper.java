@@ -16,7 +16,7 @@ public interface SignInMapper {
    * @param userName
    * @return
    */
-  List<Map<String, String>> userIsSignIn(@Param("userName") String userName);
+  List<User> userIsSignIn(@Param("userName") String userName);
 
   int userAdd(User user);
 

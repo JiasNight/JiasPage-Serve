@@ -20,6 +20,7 @@
     <!--自动生成的子模块依赖-->
     <modules>
         <module>PAGE-Common</module>
+        <module>PAGE-Auth</module>
         <module>PAGE-Client</module>
         <module>PAGE-Admin</module>
     </modules>

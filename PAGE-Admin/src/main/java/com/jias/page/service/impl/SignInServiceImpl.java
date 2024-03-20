@@ -1,12 +1,11 @@
 package com.jias.page.service.impl;
 
 import com.jias.page.domain.User;
-import com.jias.page.exception.GlobalException;
 import com.jias.page.mapper.SignInMapper;
 import com.jias.page.service.ISignInService;
 import com.jias.page.utils.cryptionUtil.AESUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
-import com.jias.page.utils.tokenUtil.TokenUtil;
+import com.jias.page.utils.jwtUtil.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,15 +49,22 @@ public class SignInServiceImpl implements ISignInService {
       // 使用AES解密前端传递过来的加密字符串
       String resultPassword = AESUtil.decrypt(password, AES_KEY);
       BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-      List<Map<String, String>> userList = signInMapper.userIsSignIn(userName);
+      List<User> userList = signInMapper.userIsSignIn(userName);
+      User resultUser = new User();
+      Map<String, Object> resultMap = new HashMap();
       boolean isHave = false;
       for (int i = 0; i < userList.size(); i++) {
-        isHave = bCryptPasswordEncoder.matches(resultPassword, userList.get(i).get("userPassword"));
+        isHave = bCryptPasswordEncoder.matches(resultPassword, userList.get(i).getUserPassword());
+        resultUser = userList.get(i);
+        resultMap.put("userName", userList.get(i).getUserName());
+        resultMap.put("userId", userList.get(i).getUserId());
+        resultMap.put("userPhone", userList.get(i).getUserPhone());
         if (isHave) break;
       }
       if (isHave) {
-        TokenUtil tokenUtil = new TokenUtil();
-        String token = tokenUtil.generateToken(userName);
+        JwtUtil jwtUtil = new JwtUtil();
+        String token =
+            jwtUtil.createJwt(resultUser.getUserId(), resultUser.getUserName(), resultMap, 36000L);
         // 把token存到redis中
         redisUtil.set("pageToken", token, 60);
         signInInfo.put("isSignIn", true);
