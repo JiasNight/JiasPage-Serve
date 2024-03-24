@@ -2,6 +2,8 @@ package com.jias.page.service;
 
 import com.jias.page.domain.SignInUser;
 
+import java.util.Map;
+
 public interface ISignInService {
 
   /**
@@ -10,5 +12,5 @@ public interface ISignInService {
    * @param signInUser 用户信息
    * @return boolean
    */
-  boolean userIsSigIn(SignInUser signInUser);
+  Map<String, String> userIsSigIn(SignInUser signInUser);
 }
