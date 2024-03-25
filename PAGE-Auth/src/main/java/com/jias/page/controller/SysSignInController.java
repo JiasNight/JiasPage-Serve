@@ -2,8 +2,11 @@ package com.jias.page.controller;
 
 import com.jias.page.config.TransferConfig;
 import com.jias.page.domain.SignInUser;
+import com.jias.page.exception.ServiceException;
 import com.jias.page.service.ISignInService;
 import com.jias.page.utils.resultUtil.Result;
+import com.jias.page.utils.resultUtil.ResultEnum;
+import com.jias.page.utils.resultUtil.ResultEnumUtil;
 import com.jias.page.utils.verifyUtil.ValidateCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,17 +36,14 @@ public class SysSignInController {
   @ApiOperation(value = "用户登陆", notes = "用户登陆")
   @PostMapping("/singIn")
   public Result singIn(@RequestBody SignInUser signInUser) {
-    try {
-      Map resultMap = signInService.userIsSigIn(signInUser);
-      if (resultMap.get("isSignIn").equals("true")) {
-        Map<String, String> tMap = new HashMap<String, String>();
-        tMap.put("token", resultMap.get("token").toString());
-        return Result.success(tMap);
-      } else {
-        return Result.failure("登陆失败!");
-      }
-    } catch (Exception e) {
-      return Result.failure(e.toString());
+    Map<String, Object> resultMap = signInService.userIsSigIn(signInUser);
+    if (resultMap.get("isSignIn").equals("true")) {
+      Map<String, String> tMap = new HashMap<String, String>();
+      tMap.put("token", resultMap.get("token").toString());
+      return Result.success(tMap);
+    } else {
+      return Result.failure(
+          ResultEnumUtil.getByCode((Integer) resultMap.get("code"), ResultEnum.class));
     }
   }
 

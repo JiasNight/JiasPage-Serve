@@ -69,7 +69,7 @@ net-transfer:
 
 logging:
   file:
-    path: logs/client
+    path: logs/auth
   level:
     com.jias.page: debug
 

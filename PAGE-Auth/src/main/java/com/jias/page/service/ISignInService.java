@@ -12,5 +12,5 @@ public interface ISignInService {
    * @param signInUser 用户信息
    * @return boolean
    */
-  Map<String, String> userIsSigIn(SignInUser signInUser);
+  Map<String, Object> userIsSigIn(SignInUser signInUser);
 }
