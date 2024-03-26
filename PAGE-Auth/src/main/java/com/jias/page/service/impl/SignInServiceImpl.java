@@ -68,7 +68,7 @@ public class SignInServiceImpl implements ISignInService {
     if (matches) {
       String token =
           jwtUtil.createJwt(userInfo.getUserId(), userInfo.getUsername(), userMap, 36000L);
-      redisUtil.set(userInfo.getUserId(), token, 60);
+      redisUtil.set(userInfo.getUserId(), token, 300);
       resultMap.put("token", token);
       resultMap.put("isSignIn", "true");
       resultMap.put("code", ResultEnum.SUCCESS);

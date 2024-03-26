@@ -2,8 +2,9 @@ package com.jias.page.controller;
 
 import com.jias.page.config.TransferConfig;
 import com.jias.page.domain.SignInUser;
-import com.jias.page.exception.ServiceException;
+import com.jias.page.domain.vo.UserInfo;
 import com.jias.page.service.ISignInService;
+import com.jias.page.service.IUserService;
 import com.jias.page.utils.resultUtil.Result;
 import com.jias.page.utils.resultUtil.ResultEnum;
 import com.jias.page.utils.resultUtil.ResultEnumUtil;
@@ -27,9 +28,11 @@ import java.util.Map;
 @RestController
 @Api(tags = "登陆验证")
 @RequestMapping("/user")
-public class SysSignInController {
+public class SysUserController {
 
   @Autowired ISignInService signInService;
+
+  @Autowired IUserService userService;
 
   @Autowired TransferConfig transferConfig;
 
@@ -78,5 +81,12 @@ public class SysSignInController {
     map.put("safe", transferConfig.getRequestSafe());
 
     return Result.success(map);
+  }
+
+  @ApiOperation(value = "获取用户信息", notes = "用户信息")
+  @PostMapping("/getInfo")
+  public Result getUserInfo(@RequestParam("token") String token) {
+    UserInfo userInfo = userService.getUserInfo(token);
+    return Result.success(userInfo);
   }
 }

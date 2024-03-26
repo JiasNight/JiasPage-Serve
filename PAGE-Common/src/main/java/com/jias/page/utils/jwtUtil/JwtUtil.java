@@ -3,6 +3,7 @@ package com.jias.page.utils.jwtUtil;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -10,6 +11,7 @@ import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Map;
 
+@Component
 public class JwtUtil {
 
   private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
@@ -67,7 +69,8 @@ public class JwtUtil {
    */
   public Claims parseJwt(String token) {
     try {
-      return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
+      Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
+      return claims;
     } catch (Exception e) {
       if (e instanceof ExpiredJwtException) {
         // 现在不需要使用 claims.getExpiration().before(new Date());
