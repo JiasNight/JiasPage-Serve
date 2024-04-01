@@ -1,5 +1,11 @@
 # 公共配置部分
 
+spring:
+  security:
+    user:
+      name: jias
+      password: jias
+
 # 设置日志级别
 logging:
   level:

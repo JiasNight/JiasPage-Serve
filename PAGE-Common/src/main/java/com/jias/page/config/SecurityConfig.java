@@ -12,7 +12,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //放行权限
-        http.authorizeRequests().antMatchers("/**").permitAll().and().csrf().disable();
+        http.authorizeRequests()
+//                // 允许登录页面匿名访问
+//                .antMatchers("/signIn", "/errPage").anonymous()
+//                // 所有的静态资源允许匿名访问
+//                .antMatchers(
+//                        "/css/**",
+//                        "/js/**",
+//                        "/images/**",
+//                        "/fonts/**",
+//                        "/favicon.ico"
+//                ).anonymous()
+//                // 其他所有的请求都需要登录认证
+//                .anyRequest().authenticated()
+                .antMatchers("/**").permitAll().and().csrf().disable();
         super.configure(http);
     }
 }

@@ -25,8 +25,7 @@ public class RequestIntercept implements HandlerInterceptor {
    * @throws Exception
    */
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     //        log.debug(request.getMethod());
     //        log.debug(request.getRequestURI());
     //        StringBuffer url = request.getRequestURL();

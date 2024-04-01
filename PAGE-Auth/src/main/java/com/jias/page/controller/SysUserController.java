@@ -37,7 +37,7 @@ public class SysUserController {
   @Autowired TransferConfig transferConfig;
 
   @ApiOperation(value = "用户登陆", notes = "用户登陆")
-  @PostMapping("/singIn")
+  @PostMapping("/signIn")
   public Result singIn(@RequestBody SignInUser signInUser) {
     Map<String, Object> resultMap = signInService.userIsSigIn(signInUser);
     if (resultMap.get("isSignIn").equals("true")) {
@@ -84,7 +84,7 @@ public class SysUserController {
   }
 
   @ApiOperation(value = "获取用户信息", notes = "用户信息")
-  @PostMapping("/getInfo")
+  @GetMapping("/getInfo")
   public Result getUserInfo(@RequestParam("token") String token) {
     UserInfo userInfo = userService.getUserInfo(token);
     return Result.success(userInfo);
