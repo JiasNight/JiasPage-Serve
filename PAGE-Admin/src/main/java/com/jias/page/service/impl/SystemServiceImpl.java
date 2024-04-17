@@ -86,8 +86,26 @@ public class SystemServiceImpl implements ISystemService {
   }
 
   @Override
-  public boolean updateMenuInfo(Menu menu) {
+  public boolean updateMenuInfo(MenuVo menuInfo) {
     try {
+      Menu menu = new Menu();
+      MenuMeta menuMeta = menuInfo.getMeta();
+      String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+      menu.setId(menuInfo.getId());
+      menu.setPath(menuInfo.getPath());
+      menu.setName(menuInfo.getName());
+      menu.setPid(menuInfo.getPid());
+      menu.setOrder(menuInfo.getOrder());
+      menu.setComponent(menuInfo.getComponent());
+      menu.setIcon(menuMeta.getIcon());
+      menu.setTitle(menuMeta.getTitle());
+      menu.setMenuType(menuMeta.getMenuType());
+      menu.setShow(menuMeta.getShow());
+      menu.setDisabled(menuMeta.getDisabled());
+      menu.setCache(menuMeta.getCache());
+      menu.setDescription(menuMeta.getDescription());
+      menu.setDisabled(menuMeta.getDisabled());
+      menu.setUpdateTime(time);
       int i = systemMapper.updateMenuInfo(menu);
       if (i > 0) {
         return true;

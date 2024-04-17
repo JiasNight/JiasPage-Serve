@@ -2,25 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jias.page.mapper.SystemMapper">
 
+<!--    <resultMap type="com.jias.page.domain.Menu" id="AdminMenuResult">-->
+<!--        <result property="id"    column="id"    />-->
+<!--        <result property="pid"    column="pid"    />-->
+<!--        <result property="title"    column="title"    />-->
+<!--        <result property="name"    column="name"    />-->
+<!--        <result property="icon"    column="icon"    />-->
+<!--        <result property="path"    column="path"    />-->
+<!--        <result property="menuType"    column="menu_type"    />-->
+<!--        <result property="show"    column="show"    />-->
+<!--        <result property="disabled"    column="disabled"    />-->
+<!--        <result property="cache"    column="cache"    />-->
+<!--        <result property="component"    column="component"    />-->
+<!--        <result property="description"    column="description"    />-->
+<!--        <result property="order"    column="order"    />-->
+<!--        <result property="createBy"    column="create_by"    />-->
+<!--        <result property="isDeleted"    column="is_deleted"    />-->
+<!--        <result property="createTime"    column="create_time"    />-->
+<!--        <result property="updateTime"    column="update_time"    />-->
+<!--    </resultMap>-->
+
+    <sql id="selectMenuResultVo">
+        select id, pid, title, title, `name`, icon, path, menu_type, `show`, disabled, `cache`, component, description, `order`, create_by, is_deleted, create_time, update_time
+        from sys_menu
+    </sql>
+
     <!-- 查询用户路由信息 -->
     <select id="getRouterListByRole" parameterType="string" resultType="com.jias.page.domain.Menu">
-        select *
-        from sys_menus
-        where is_deleted = '0'
+        <include refid="selectMenuResultVo"/>
+        <where>
+            <if test="is_deleted != null  and is_deleted != ''"> and is_deleted = '0'</if>
+        </where>
     </select>
 
     <!-- 查询菜单列表-->
     <select id="getMenuList" parameterType="string" resultType="com.jias.page.domain.Menu">
         select *
-        from sys_menus
+        from sys_menu
         where is_deleted = '0'
     </select>
 
     <insert id="addMenuInfo" parameterType="Menu">
-        insert into sys_menus(id, pid, title, name, icon, path, menu_type, `show`, disabled, cache, component,
-                              description, `order`, create_by, is_deleted, create_time, update_time)
-        values (#{id}, #{pid}, #{title}, #{name}, #{icon}, #{path}, #{menuType}, #{show}, #{disabled}, #{cache},
-                #{component}, #{description}, #{order}, #{createBy}, #{isDeleted}, #{createTime}, #{updateTime})
-
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">id,</if>
+            <if test="pid != null and pid != ''">pid,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="name != null and name != ''">`name`,</if>
+            <if test="icon != null and icon != ''">icon,</if>
+            <if test="path != null and path != ''">`path`,</if>
+            <if test="menuType != null and menuType != ''">menu_type,</if>
+            <if test="show != null and show != ''">`show`,</if>
+            <if test="disabled != null and disabled != ''">disabled,</if>
+            <if test="cache != null and cache != ''">`cache`,</if>
+            <if test="component != null and component != ''">component,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="order != null and order != ''">`order`,</if>
+            <if test="isDeleted != null and isDeleted != ''">is_deleted,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null and createTime != ''">create_time,</if>
+            <if test="updateTime != null and updateTime != ''">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="pid != null and pid != ''">#{pid},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="icon != null and icon != ''">#{icon},</if>
+            <if test="path != null and path != ''">#{path},</if>
+            <if test="menuType != null and menuType != ''">#{menuType},</if>
+            <if test="show != null and show != ''">#{show},</if>
+            <if test="disabled != null and disabled != ''">#{disabled},</if>
+            <if test="cache != null and cache != ''">#{cache},</if>
+            <if test="component != null and component != ''">#{component},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="order != null and order != ''">#{order},</if>
+            <if test="isDeleted != null and isDeleted != ''">#{isDeleted},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null and createTime != ''">#{createTime},</if>
+            <if test="updateTime != null and updateTime != ''">#{updateTime},</if>
+        </trim>
     </insert>
+
+    <update id="updateMenuInfo" parameterType="Menu">
+        update sys_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="path != null">`path` = #{path},</if>
+            <if test="menuType != null">menu_type = #{menuType},</if>
+            <if test="show != null">`show` = #{show},</if>
+            <if test="disabled != null">disabled = #{disabled},</if>
+            <if test="cache != null">`cache` = #{cache},</if>
+            <if test="component != null">component = #{component},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="order != null">`order` = #{order},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+
+    </update>
+
+<!--    <delete id="delMenuInfo" parameterType="string">-->
+<!--        delete from sys_menu where id = #{id}-->
+<!--    </delete>-->
+
+    <update id="delMenuInfo" parameterType="string">
+        update sys_menu set is_deleted='1' where id = #{id}
+    </update>
+
+
 </mapper>

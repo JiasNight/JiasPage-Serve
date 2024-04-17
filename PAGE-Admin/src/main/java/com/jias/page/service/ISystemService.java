@@ -19,7 +19,7 @@ public interface ISystemService {
 
   boolean addMenuInfo(MenuVo menu);
 
-  boolean updateMenuInfo(Menu menu);
+  boolean updateMenuInfo(MenuVo menu);
 
   boolean delMenuInfo(String mId);
 }

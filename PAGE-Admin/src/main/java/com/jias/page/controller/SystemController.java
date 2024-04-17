@@ -36,14 +36,10 @@ public class SystemController {
   }
 
   @ApiOperation(value = "获取用户的路由表", notes = "获取用户的路由表")
-  @PostMapping("/routes")
+  @GetMapping("/routes")
   public Result getUserRouters() {
-    try {
-      List<MenuVo> menuList = systemService.getRouterList();
-      return Result.success(menuList);
-    } catch (Exception e) {
-      return Result.failure("获取用户路由表失败！");
-    }
+//    List<MenuVo> menuList = systemService.getRouterList();
+    return Result.success(systemService.getRouterList());
   }
 
   @ApiOperation(value = "获取菜单列表", notes = "获取菜单列表")
@@ -66,6 +62,36 @@ public class SystemController {
         return Result.success();
       } else {
         return Result.failure("新增菜单列表失败！");
+      }
+    } catch (Exception e) {
+      return Result.failure("新增菜单列表失败！");
+    }
+  }
+
+  @ApiOperation(value = "修改菜单", notes = "修改菜单")
+  @PostMapping("/menu/update")
+  public Result updateMenu(@RequestBody MenuVo menu) {
+    try {
+      boolean b = systemService.updateMenuInfo(menu);
+      if (b) {
+        return Result.success();
+      } else {
+        return Result.failure("更新菜单列表失败！");
+      }
+    } catch (Exception e) {
+      return Result.failure("更新菜单列表失败！");
+    }
+  }
+
+  @ApiOperation(value = "删除菜单", notes = "修改菜单")
+  @GetMapping("/menu/delete/{mId}")
+  public Result delMenu(@PathVariable("mId") String mId) {
+    try {
+      boolean b = systemService.delMenuInfo(mId);
+      if (b) {
+        return Result.success();
+      } else {
+        return Result.failure("删除菜单列表失败！");
       }
     } catch (Exception e) {
       return Result.failure("新增菜单列表失败！");
