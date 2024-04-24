@@ -3,9 +3,9 @@ package com.jias.page.service.impl;
 import com.jias.page.domain.Markdown;
 import com.jias.page.mapper.MarkdownMapper;
 import com.jias.page.service.IMarkdownService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;

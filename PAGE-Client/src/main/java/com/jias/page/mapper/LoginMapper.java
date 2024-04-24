@@ -1,6 +1,5 @@
 package com.jias.page.mapper;
 
-import com.jias.page.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

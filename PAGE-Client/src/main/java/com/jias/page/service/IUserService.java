@@ -2,7 +2,6 @@ package com.jias.page.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jias.page.domain.User;
 
 import java.util.Map;
 

@@ -25,6 +25,25 @@ spring:
         # 连接池中的最小空闲连接 默认 0
         min-idle: 0
 
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      #包的扫描需要修改对应位置
+      packages-to-scan: com.xiaominfo.knife4j.demo.web#需要改位置
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
 # 设置日志级别
 logging:
   level:

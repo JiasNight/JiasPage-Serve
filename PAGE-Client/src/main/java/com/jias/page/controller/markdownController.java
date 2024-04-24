@@ -3,8 +3,6 @@ package com.jias.page.controller;
 import com.jias.page.domain.Markdown;
 import com.jias.page.service.IMarkdownService;
 import com.jias.page.utils.resultUtil.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +12,12 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin
-@Api(tags = "markdown接口")
 @RequestMapping("/md")
 public class markdownController {
 
     @Autowired
     IMarkdownService markdownService;
 
-    @ApiOperation(value = "md保存", notes = "保存markdown")
     @PostMapping("/markdownSave")
     public Result markdownSave(@RequestBody Markdown markdown) {
         try {
@@ -38,7 +34,6 @@ public class markdownController {
         }
     }
 
-    @ApiOperation(value = "md根据id获取", notes = "获取markdown")
     @GetMapping("/markdownById")
     public Result markdownSave(@RequestParam("mdId") String mdId) {
         try {

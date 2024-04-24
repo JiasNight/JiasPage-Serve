@@ -1,13 +1,12 @@
 package com.jias.page.utils.cryptionUtil;
 
-import org.apache.tomcat.util.codec.binary.Base64;
-
 import javax.crypto.Cipher;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,9 +57,10 @@ public class RSAUtil {
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
         // 得到公钥
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        String publicKeyString = new String(Base64.encodeBase64(publicKey.getEncoded()));
+        Base64.Encoder encoder = Base64.getEncoder();
+        String publicKeyString =  encoder.encodeToString(publicKey.getEncoded());
         // 得到私钥字符串
-        String privateKeyString = new String(Base64.encodeBase64((privateKey.getEncoded())));
+        String privateKeyString = encoder.encodeToString(privateKey.getEncoded());
         // 将公钥和私钥保存到Map
         keyMap.put(publicKeyFlag,publicKeyString);
         keyMap.put(privateKeyFlag,privateKeyString);
@@ -76,16 +76,16 @@ public class RSAUtil {
      */
     public static String encrypt( String str, String publicKey, boolean urlSafe ) throws Exception{
         //base64编码的公钥
-        byte[] decoded = Base64.decodeBase64(publicKey);
+        byte[] decoded = Base64.getDecoder().decode(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(algorithm).generatePublic(new X509EncodedKeySpec(decoded));
         //RSA加密
         Cipher cipher = Cipher.getInstance(algorithm);
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
         byte[] bdata=cipher.doFinal(str.getBytes("UTF-8"));
         if(urlSafe) {
-            return  Base64.encodeBase64URLSafeString(bdata);
+            return  Base64.getUrlEncoder().encodeToString(bdata);
         }
-        return Base64.encodeBase64String(bdata);
+        return Base64.getUrlEncoder().encodeToString(bdata);
     }
 
     /**
@@ -97,9 +97,9 @@ public class RSAUtil {
      */
     public static String decrypt(String str, String privateKey) throws Exception{
         //64位解码加密后的字符串
-        byte[] inputByte = Base64.decodeBase64(str.getBytes("UTF-8"));
+        byte[] inputByte = Base64.getDecoder().decode(str.getBytes("UTF-8"));
         //base64编码的私钥
-        byte[] decoded = Base64.decodeBase64(privateKey);
+        byte[] decoded = Base64.getDecoder().decode(privateKey);
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance(algorithm).generatePrivate(new PKCS8EncodedKeySpec(decoded));
         //RSA解密
         Cipher cipher = Cipher.getInstance(algorithm);
@@ -122,14 +122,14 @@ public class RSAUtil {
     public static String encryptNew( String str, String publicKey) throws Exception{
 
         //base64编码的公钥
-        byte[] decoded = Base64.decodeBase64(publicKey);
+        byte[] decoded = Base64.getDecoder().decode(publicKey);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(algorithm).generatePublic(new X509EncodedKeySpec(decoded));
         //RSA加密
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
         byte[] byteData=cipher.doFinal(str.getBytes("UTF-8"));
 
-        return  Base64.encodeBase64String(byteData);
+        return  Base64.getUrlEncoder().encodeToString(byteData);
     }
 
     /**
@@ -145,9 +145,9 @@ public class RSAUtil {
      */
     public static String decryptNew(String str, String privateKey) throws Exception{
         //64位解码加密后的字符串
-        byte[] inputByte = Base64.decodeBase64(str.getBytes("UTF-8"));
+        byte[] inputByte = Base64.getDecoder().decode(str.getBytes("UTF-8"));
         //base64编码的私钥
-        byte[] decoded = Base64.decodeBase64(privateKey);
+        byte[] decoded = Base64.getDecoder().decode(privateKey);
         RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance(algorithm).generatePrivate(new PKCS8EncodedKeySpec(decoded));
         //RSA解密
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);

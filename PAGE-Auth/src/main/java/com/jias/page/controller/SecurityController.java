@@ -2,8 +2,8 @@ package com.jias.page.controller;
 
 import com.jias.page.utils.cryptionUtil.RSAUtil;
 import com.jias.page.utils.resultUtil.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +14,11 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@Api(tags = "密钥")
+@Tag(name = "密钥")
 @RequestMapping("/security")
 public class SecurityController {
 
-    @ApiOperation(value = "获取公钥", notes = "获取公钥")
+    @Operation(summary  = "获取公钥")
     @GetMapping("/pKey")
     public Result getPublicKey() throws Exception {
         Map<String, String> RSAMap = RSAUtil.genKeyPair();

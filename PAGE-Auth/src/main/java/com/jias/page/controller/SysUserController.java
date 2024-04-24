@@ -15,28 +15,17 @@ import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.resultUtil.Result;
 import com.jias.page.utils.resultUtil.ResultEnum;
 import com.jias.page.utils.resultUtil.ResultEnumUtil;
-import com.jias.page.utils.verifyUtil.ValidateCode;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @CrossOrigin
 @RestController
-@Api(tags = "登陆验证")
+@Tag(name = "登陆验证")
 @RequestMapping("/user")
 public class SysUserController {
 
@@ -52,7 +41,7 @@ public class SysUserController {
   @Autowired
   RedisConfigProperties redisConfigProperties;
 
-  @ApiOperation(value = "用户登陆", notes = "用户登陆")
+  @Operation(summary  = "用户登陆")
   @PostMapping("/signIn")
   public Result singIn(@RequestBody SignInUser signInUser) {
     Map<String, Object> resultMap = signInService.userIsSigIn(signInUser);
@@ -66,7 +55,6 @@ public class SysUserController {
     }
   }
 
-  @ApiOperation(value = "登录验证码", notes = "登录验证码")
   @GetMapping("/validateCode")
   public Result getCode()
       throws Exception {
@@ -128,7 +116,6 @@ public class SysUserController {
     return Result.success(map);
   }
 
-  @ApiOperation(value = "获取用户信息", notes = "用户信息")
   @GetMapping("/getInfo")
   public Result getUserInfo(@RequestParam("token") String token) {
     UserInfo userInfo = userService.getUserInfo(token);

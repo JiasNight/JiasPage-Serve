@@ -6,6 +6,7 @@ import com.jias.page.service.ISignInService;
 import com.jias.page.utils.cryptionUtil.AESUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.jwtUtil.JwtUtil;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +31,8 @@ public class SignInServiceImpl implements ISignInService {
 
   private static final String AES_KEY = "def009A1bcO538JK";
 
-  @Resource SignInMapper signInMapper;
+  @Resource
+  SignInMapper signInMapper;
 
   @Autowired RedisUtil redisUtil;
 

@@ -1,12 +1,11 @@
 package com.jias.page.service.impl;
 
-import com.jias.page.domain.User;
 import com.jias.page.mapper.LoginMapper;
 import com.jias.page.service.ILoginService;
+import jakarta.annotation.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.UUID;

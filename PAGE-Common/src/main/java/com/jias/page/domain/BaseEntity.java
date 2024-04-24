@@ -103,7 +103,7 @@ public class BaseEntity implements Serializable
     {
         if (params == null)
         {
-            params = new HashMap<>();
+            params = new HashMap();
         }
         return params;
     }

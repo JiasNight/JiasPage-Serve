@@ -2,30 +2,25 @@ package com.jias.page.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jias.page.domain.User;
 import com.jias.page.service.IUserService;
 import com.jias.page.utils.resultUtil.Result;
 import com.jias.page.utils.resultUtil.ResultEnum;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Map;
 
 @RestController
-@Api(tags = "用户相关接口")
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     IUserService userService;
 
-    @ApiOperation(value = "下载文件", notes = "下载文件")
     @GetMapping("/download")
     public void downloadFile(HttpServletResponse response){
         try {
@@ -44,7 +39,6 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "上传文件", notes = "上传文件")
     @GetMapping("/upload")
     public Result uploadFile(@RequestParam("file") MultipartFile file) {
         // 获取文件名
@@ -73,7 +67,6 @@ public class UserController {
      * 获取用户信息列表
      * @return
      */
-    @ApiOperation(value = "用户列表", notes = "获取用户列表")
     @GetMapping("/userList")
     public Result getUserList(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         try {
@@ -90,7 +83,6 @@ public class UserController {
      * @param user
      * @return
      */
-    @ApiOperation(value = "添加用户", notes = "添加用户信息")
     @PostMapping("/addUser")
     public Result addUserInfo(@RequestBody User user) {
         try {
@@ -110,7 +102,6 @@ public class UserController {
      * @param userId
      * @return
      */
-    @ApiOperation(value = "删除用户", notes = "删除用户信息")
     @GetMapping("/delUser")
     public Result delUserInfo(@RequestParam(value = "userId", required = true) String userId) {
         try {
@@ -130,7 +121,6 @@ public class UserController {
      * @param user
      * @return
      */
-    @ApiOperation(value = "修改用户", notes = "修改用户信息")
     @PostMapping("/updateUser")
     public Result updateUserInfo(@RequestBody User user) {
         try {
@@ -150,7 +140,6 @@ public class UserController {
      * @param userId
      * @return
      */
-    @ApiOperation(value = "查询用户信息", notes = "查询用户详细信息")
     @GetMapping("/getUserInfo")
     public Result selectUserInfoById(@RequestParam("userId") String userId) {
         try {

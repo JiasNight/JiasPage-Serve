@@ -9,15 +9,15 @@ import com.jias.page.utils.jwtUtil.JwtUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.resultUtil.ResultEnum;
 import io.jsonwebtoken.Claims;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 @Service
 public class UserServiceImpl implements IUserService {
 
-  @Resource UserInfoMapper userInfoMapper;
+  @Resource
+  UserInfoMapper userInfoMapper;
 
   @Autowired RedisUtil redisUtil;
 

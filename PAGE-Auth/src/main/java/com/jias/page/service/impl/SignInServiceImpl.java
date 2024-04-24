@@ -9,11 +9,11 @@ import com.jias.page.utils.cryptionUtil.AESUtil;
 import com.jias.page.utils.jwtUtil.JwtUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.resultUtil.ResultEnum;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +23,8 @@ import java.util.Map;
 @Service
 public class SignInServiceImpl implements ISignInService {
 
-  @Resource SignInMapper signInMapper;
+  @Resource
+  SignInMapper signInMapper;
 
   @Autowired TransferConfig transferConfig;
 

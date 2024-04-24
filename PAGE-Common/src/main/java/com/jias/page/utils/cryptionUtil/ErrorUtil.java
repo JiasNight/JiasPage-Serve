@@ -23,6 +23,8 @@ public class ErrorUtil {
             return sw.toString();
         } catch (Exception ignored) {
             throw new RuntimeException(ignored.getMessage(), ignored);
+        } finally{
+
         }
     }
 }
