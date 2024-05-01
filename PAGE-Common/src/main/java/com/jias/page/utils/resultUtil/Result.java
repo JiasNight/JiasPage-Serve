@@ -1,5 +1,7 @@
 package com.jias.page.utils.resultUtil;
 
+import com.jias.page.enums.ResultEnum;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,8 +22,8 @@ public class Result {
   // 响应数据
   private Object data;
 
-  // 构造器私有
-  private Result() {}
+  // 构造器
+  public Result() {}
 
   public Result(Boolean success, ResultEnum resultEnum, String timestamp) {
     this.success = success;

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jias.page.service.IUserService;
 import com.jias.page.utils.resultUtil.Result;
-import com.jias.page.utils.resultUtil.ResultEnum;
+import com.jias.page.enums.ResultEnum;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;

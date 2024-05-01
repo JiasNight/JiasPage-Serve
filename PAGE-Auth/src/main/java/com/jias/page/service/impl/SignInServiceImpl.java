@@ -6,9 +6,9 @@ import com.jias.page.exception.ServiceException;
 import com.jias.page.mapper.SignInMapper;
 import com.jias.page.service.ISignInService;
 import com.jias.page.utils.cryptionUtil.AESUtil;
-import com.jias.page.utils.jwtUtil.JwtUtil;
+import com.jias.page.utils.jwtUtil.JWTUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
-import com.jias.page.utils.resultUtil.ResultEnum;
+import com.jias.page.enums.ResultEnum;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +26,8 @@ public class SignInServiceImpl implements ISignInService {
   @Resource
   SignInMapper signInMapper;
 
-  @Autowired TransferConfig transferConfig;
+  @Autowired
+  TransferConfig transferConfig;
 
   @Autowired RedisUtil redisUtil;
 
@@ -40,7 +41,7 @@ public class SignInServiceImpl implements ISignInService {
   public Map<String, Object> userIsSigIn(SignInUser signInUser) {
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    JwtUtil jwtUtil = new JwtUtil();
+    JWTUtil jwtUtil = new JWTUtil();
     Map<String, Object> userMap = new HashMap<String, Object>();
     Map<String, Object> resultMap = new HashMap<String, Object>();
 

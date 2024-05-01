@@ -1,8 +1,11 @@
 package com.jias.page.intercept;
 
+import com.jias.page.configuration.Audience;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -11,7 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Component
 public class RequestIntercept implements HandlerInterceptor {
 
+  private static final Logger logger = LoggerFactory.getLogger(RequestIntercept.class);
+
   @Autowired private RedisUtil redisUtil;
+
+  @Autowired
+  private Audience audience;
+
 
   /**
    * //三个方法的运行顺序为 preHandle -> postHandle -> afterCompletion //如果preHandle返回值为false，三个方法仅运行preHandle
@@ -25,6 +34,40 @@ public class RequestIntercept implements HandlerInterceptor {
    */
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+//    // 忽略带JwtIgnore注解的请求, 不做后续token认证校验
+//    if (handler instanceof HandlerMethod) {
+//      HandlerMethod handlerMethod = (HandlerMethod) handler;
+//      JwtIgnore jwtIgnore = handlerMethod.getMethodAnnotation(JwtIgnore.class);
+//      if (jwtIgnore != null) {
+//        return true;
+//      }
+//    }
+//
+//    if (HttpMethod.OPTIONS.equals(request.getMethod())) {
+//      response.setStatus(HttpServletResponse.SC_OK);
+//      return true;
+//    }
+//
+//    // 获取请求头信息authorization信息
+//    final String authHeader = request.getHeader(JwtUtil.AUTH_HEADER_KEY);
+//    logger.info("## authHeader= {}", authHeader);
+//
+//    if (StringUtils.isBlank(authHeader) || !authHeader.startsWith(JwtUtil.TOKEN_PREFIX)) {
+//      logger.info("### 用户未登录，请先登录 ###");
+//      throw new CustomException(ResultEnum.USER_NOT_LOGIN.getMessage());
+//    }
+//
+//    // 获取token
+//    final String token = authHeader.substring(7);
+//
+//    if(audience == null){
+//      BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+//      audience = (Audience) factory.getBean("audience");
+//    }
+//
+//    // 验证token是否有效--无效已做异常抛出，由全局异常处理后返回对应信息
+//    JwtUtil.parseJwt(token);
+
     //        log.debug(request.getMethod());
     //        log.debug(request.getRequestURI());
     //        StringBuffer url = request.getRequestURL();

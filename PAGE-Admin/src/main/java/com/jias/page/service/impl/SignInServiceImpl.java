@@ -4,8 +4,8 @@ import com.jias.page.domain.User;
 import com.jias.page.mapper.SignInMapper;
 import com.jias.page.service.ISignInService;
 import com.jias.page.utils.cryptionUtil.AESUtil;
+import com.jias.page.utils.jwtUtil.JWTUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
-import com.jias.page.utils.jwtUtil.JwtUtil;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +63,7 @@ public class SignInServiceImpl implements ISignInService {
         if (isHave) break;
       }
       if (isHave) {
-        JwtUtil jwtUtil = new JwtUtil();
+        JWTUtil jwtUtil = new JWTUtil();
         String token =
             jwtUtil.createJwt(resultUser.getUserId(), resultUser.getUserName(), resultMap, 36000L);
         // 把token存到redis中

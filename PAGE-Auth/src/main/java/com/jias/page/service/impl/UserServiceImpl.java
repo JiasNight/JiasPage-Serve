@@ -1,13 +1,14 @@
 package com.jias.page.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jias.page.domain.vo.UserInfo;
 import com.jias.page.exception.CustomException;
 import com.jias.page.exception.ServiceException;
 import com.jias.page.mapper.UserInfoMapper;
 import com.jias.page.service.IUserService;
-import com.jias.page.utils.jwtUtil.JwtUtil;
+import com.jias.page.utils.jwtUtil.JWTUtil;
 import com.jias.page.utils.redisUtil.RedisUtil;
-import com.jias.page.utils.resultUtil.ResultEnum;
+import com.jias.page.enums.ResultEnum;
 import io.jsonwebtoken.Claims;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class UserServiceImpl implements IUserService {
 
   @Autowired RedisUtil redisUtil;
 
-  @Autowired JwtUtil jwtUtil;
+  @Autowired
+  JWTUtil jwtUtil;
 
   @Override
   public UserInfo getUserInfo(String token) {
@@ -38,5 +40,17 @@ public class UserServiceImpl implements IUserService {
       throw new ServiceException(
           ResultEnum.SELECT_EXCEPTION.getCode(), ResultEnum.SELECT_EXCEPTION.getMessage());
     }
+  }
+
+  @Override
+  public UserInfo getUserById(String userId) {
+    return userInfoMapper.getUserInfoByUserId(userId);
+  }
+
+  @Override
+  public UserInfo getUserByUsername(String username) {
+    QueryWrapper queryWrapper = new QueryWrapper();
+    queryWrapper.eq("username", username);
+
   }
 }

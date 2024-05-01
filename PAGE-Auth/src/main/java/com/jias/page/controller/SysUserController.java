@@ -13,7 +13,7 @@ import com.jias.page.service.IUserService;
 import com.jias.page.utils.redisUtil.RedisConfigProperties;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.resultUtil.Result;
-import com.jias.page.utils.resultUtil.ResultEnum;
+import com.jias.page.enums.ResultEnum;
 import com.jias.page.utils.resultUtil.ResultEnumUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +33,8 @@ public class SysUserController {
 
   @Autowired IUserService userService;
 
-  @Autowired TransferConfig transferConfig;
+  @Autowired
+  TransferConfig transferConfig;
 
   @Autowired
   RedisUtil redisUtil;
@@ -55,6 +56,7 @@ public class SysUserController {
     }
   }
 
+  @Operation(summary  = "获取验证码")
   @GetMapping("/validateCode")
   public Result getCode()
       throws Exception {
@@ -103,20 +105,21 @@ public class SysUserController {
     redisUtil.set(verifyId, code, 60);
     Jedis jedis = new Jedis(redisConfigProperties.getHost(), redisConfigProperties.getPort());
     jedis.set("page_verCode:" + verifyId, code);
-//    ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(5);
+    // ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>(5);
     Map map = new HashMap<>();
     // 验证码对应的redis上的uuid
     map.put("uuid", verifyId);
-    //图片上的验证码
+    // 图片上的验证码
     map.put("code", code);
-    //将图片转换成输出流传到前端上
+    // 将图片转换成输出流传到前端上
     map.put("base64", "data:image/png;base64," + Base64.encode(os.toByteArray()));
     map.put("safe", transferConfig.getRequestSafe());
 
     return Result.success(map);
   }
 
-  @GetMapping("/getInfo")
+  @Operation(summary  = "通过token获取用户信息")
+  @GetMapping("/getUserInfo")
   public Result getUserInfo(@RequestParam("token") String token) {
     UserInfo userInfo = userService.getUserInfo(token);
     return Result.success(userInfo);
