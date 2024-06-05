@@ -18,31 +18,36 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired
-    MyUserDetailsService myUserDetailsService;
+  @Autowired MyUserDetailsService myUserDetailsService;
 
-    @Autowired
-    MyPasswordEncoder myPasswordEncoder;
+  @Autowired MyPasswordEncoder myPasswordEncoder;
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // 获取用户输入的用户名和密码
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
-        try{
-            boolean matches = myPasswordEncoder.matches(password, userDetails.getPassword());
-            if(!matches){
-                throw new AuthenticationException("用户名或密码错误！"){};
-            }
-        } catch (Exception e) {
-            throw new AuthenticationException("用户名或密码错误！"){};
-        }
-        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+  @Override
+  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    // 获取用户输入的用户名和密码
+    String username = authentication.getName();
+    String password = authentication.getCredentials().toString();
+    UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+    try {
+      boolean matches = myPasswordEncoder.matches(password, userDetails.getPassword());
+      if (!matches) {
+        throw new AuthenticationException("用户名或密码错误！") {};
+      }
+    } catch (Exception e) {
+      throw new AuthenticationException("用户名或密码错误！") {};
     }
+    return new UsernamePasswordAuthenticationToken(
+        userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+  }
 
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
-    }
+  /**
+   * 注意这里的supports方法，是实现多种认证方式的关键，认证管理器AuthenticationManager会通过这个supports方法来判定当前需要使用哪一种认证方式
+   *
+   * @param authentication
+   * @return
+   */
+  @Override
+  public boolean supports(Class<?> authentication) {
+    return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+  }
 }

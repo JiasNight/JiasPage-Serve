@@ -15,6 +15,7 @@ import com.jias.page.utils.resultUtil.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 import java.util.HashMap;
@@ -26,21 +27,18 @@ import java.util.Map;
 @RequestMapping("/user")
 public class SysUserController {
 
-  @Autowired
-  ISysUserService sysUserService;
+  @Autowired ISysUserService sysUserService;
 
-  @Autowired
-  TransferConfig transferConfig;
+  @Autowired TransferConfig transferConfig;
 
-  @Autowired
-  RedisUtil redisUtil;
+  @Autowired RedisUtil redisUtil;
 
-  @Autowired
-  RedisConfigProperties redisConfigProperties;
+  @Autowired RedisConfigProperties redisConfigProperties;
 
-  @Operation(summary  = "用户登陆")
+  @Operation(summary = "用户登陆")
   @PostMapping("/signIn")
   public Result singIn(@RequestBody SignInUser signInUser) {
+
     String token = sysUserService.userSigIn(signInUser);
     return Result.success(token);
     // if (resultMap.get("isSignIn").equals("true")) {
@@ -53,44 +51,43 @@ public class SysUserController {
     // }
   }
 
-  @Operation(summary  = "获取验证码")
+  @Operation(summary = "获取验证码")
   @GetMapping("/validateCode")
-  public Result getCode()
-      throws Exception {
-//    // 禁止图像缓存。
-//    response.setHeader("Pragma", "no-cache");
-//    response.setHeader("Cache-Control", "no-cache");
-//    response.setDateHeader("Expires", 0);
-//    response.setContentType("image/jpeg");
-//    String ip = request.getRemoteAddr();
-//
-//
-//
-//    System.out.println("当前IP:" + ip);
-//    ValidateCode vCode = new ValidateCode();
-//    // 删除以前的
-//    session.removeAttribute("imageCode");
-//    // 将验证码存入Session
-//    session.setAttribute("imageCode", vCode.createImage()[0]);
-//
-//    // 将图片转正base64
-//    BufferedImage image = (BufferedImage) vCode.createImage()[1];
-//    // 转base64
-//    Base64.Encoder encoder = Base64.getEncoder();
-//    // io流
-//    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//    // 写入流中
-//    ImageIO.write(image, "png", baos);
-//    // 转换成字节
-//    byte[] bytes = baos.toByteArray();
-//    // 转换成base64串
-//    String pngBase64 = encoder.encodeToString(bytes).trim();
-//    // 删除 \r\n
-//    pngBase64 = pngBase64.replaceAll("\n", "").replaceAll("\r", "");
-//
-//    Map map = new HashMap<>();
-//    map.put("base64", "data:image/png;base64," + pngBase64);
-//    map.put("safe", transferConfig.getRequestSafe());
+  public Result getCode() throws Exception {
+    //    // 禁止图像缓存。
+    //    response.setHeader("Pragma", "no-cache");
+    //    response.setHeader("Cache-Control", "no-cache");
+    //    response.setDateHeader("Expires", 0);
+    //    response.setContentType("image/jpeg");
+    //    String ip = request.getRemoteAddr();
+    //
+    //
+    //
+    //    System.out.println("当前IP:" + ip);
+    //    ValidateCode vCode = new ValidateCode();
+    //    // 删除以前的
+    //    session.removeAttribute("imageCode");
+    //    // 将验证码存入Session
+    //    session.setAttribute("imageCode", vCode.createImage()[0]);
+    //
+    //    // 将图片转正base64
+    //    BufferedImage image = (BufferedImage) vCode.createImage()[1];
+    //    // 转base64
+    //    Base64.Encoder encoder = Base64.getEncoder();
+    //    // io流
+    //    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    //    // 写入流中
+    //    ImageIO.write(image, "png", baos);
+    //    // 转换成字节
+    //    byte[] bytes = baos.toByteArray();
+    //    // 转换成base64串
+    //    String pngBase64 = encoder.encodeToString(bytes).trim();
+    //    // 删除 \r\n
+    //    pngBase64 = pngBase64.replaceAll("\n", "").replaceAll("\r", "");
+    //
+    //    Map map = new HashMap<>();
+    //    map.put("base64", "data:image/png;base64," + pngBase64);
+    //    map.put("safe", transferConfig.getRequestSafe());
 
     LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(100, 40);
     String verifyId = IdUtil.simpleUUID();
@@ -115,7 +112,7 @@ public class SysUserController {
     return Result.success(map);
   }
 
-  @Operation(summary  = "通过token获取用户信息")
+  @Operation(summary = "通过token获取用户信息")
   @GetMapping("/getUserInfo")
   public Result getUserInfo(@RequestParam("token") String token) {
     UserInfo userInfo = sysUserService.getUserInfo(token);

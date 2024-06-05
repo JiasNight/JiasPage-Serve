@@ -43,6 +43,18 @@ public class SecurityConfig {
 
   @Autowired MyAuthenticationProvider myAuthenticationProvider;
 
+  @Autowired MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
+  @Autowired MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
+  @Autowired MyLogoutSuccessHandler myLogoutSuccessHandler;
+
+  @Autowired MyAuthenticationEntryPoint myAuthenticationEntryPoint;
+
+  @Autowired MyAccessDeniedHandler myAccessDeniedHandler;
+
+  @Autowired MyAuthenticationTokenFilter myAuthenticationTokenFilter;
+
   /**
    * 身份认证管理器，调用authenticate()方法完成认证
    *
@@ -53,6 +65,7 @@ public class SecurityConfig {
   @Bean
   public AuthenticationManager authenticationManager(
       AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    System.out.println(authenticationConfiguration);
     return authenticationConfiguration.getAuthenticationManager();
   }
 
@@ -63,13 +76,14 @@ public class SecurityConfig {
    */
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration config = new CorsConfiguration();
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("*");
-    config.addAllowedOrigin("*");
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
+    corsConfiguration.addAllowedHeader("*");
+    corsConfiguration.addAllowedMethod("*");
+    corsConfiguration.addAllowedOrigin("*");
+    corsConfiguration.setMaxAge(3600L);
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", config.applyPermitDefaultValues());
+    source.registerCorsConfiguration("/**", corsConfiguration.applyPermitDefaultValues());
     return source;
   }
 
@@ -98,14 +112,12 @@ public class SecurityConfig {
                     // 指定登录接口
                     .loginProcessingUrl("/user/signIn")
                     // 登录成功处理器
-                    .successHandler(new MyAuthenticationSuccessHandler(redisUtil))
+                    .successHandler(myAuthenticationSuccessHandler)
                     // 登录失败处理器
-                    .failureHandler(new MyAuthenticationFailureHandler())
+                    .failureHandler(myAuthenticationFailureHandler)
                     .permitAll())
         // 配置退出登录的行为
-        .logout(
-            logout ->
-                logout.logoutUrl("/logout").logoutSuccessHandler(new MyLogoutSuccessHandler()));
+        .logout(logout -> logout.logoutUrl("/logout").logoutSuccessHandler(myLogoutSuccessHandler));
 
     httpSecurity
         // 配置了会话管理策略:无状态管理政策,即不会创建会话，每个请求都需要进行完整的身份验证。
@@ -118,8 +130,8 @@ public class SecurityConfig {
                     // 用于处理未经身份验证的用户尝试访问受保护资源的情况。
                     // 如果是认证过程中出现的异常会被封装成AuthenticationException然后调用AuthenticationEntryPoint对象的方法去进行异常处理。
                     // 如果是授权过程中出现的异常会被封装成AccessDeniedException然后调用AccessDeniedHandler对象的方法去进行异常处理。
-                    .authenticationEntryPoint(new MyAuthenticationEntryPoint())
-                    .accessDeniedHandler(new MyAccessDeniedHandler()))
+                    .authenticationEntryPoint(myAuthenticationEntryPoint)
+                    .accessDeniedHandler(myAccessDeniedHandler))
         //  授权过滤器
         .authorizeHttpRequests(
             authorizeHttpRequest ->
@@ -151,9 +163,9 @@ public class SecurityConfig {
                     .authenticated())
         .authenticationProvider(myAuthenticationProvider);
 
-    // 加我们自定义的token过滤器，替代UsernamePasswordAuthenticationFilter
+    // 加我们自定义的token过滤器，去过滤接口请
     httpSecurity.addFilterBefore(
-        new MyAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        myAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
     // 退出
     httpSecurity.logout(

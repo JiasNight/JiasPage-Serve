@@ -30,34 +30,32 @@ import java.util.Map;
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private RedisUtil redisUtil;
+  private RedisUtil redisUtil;
 
-    @Autowired
-    JWTUtil jwtUtil;
+  @Autowired JWTUtil jwtUtil;
 
-    public MyAuthenticationSuccessHandler(RedisUtil redisUtil) {
-        this.redisUtil = redisUtil;
-    }
+  public MyAuthenticationSuccessHandler(RedisUtil redisUtil) {
+    this.redisUtil = redisUtil;
+  }
 
-    @Override
-    public void onAuthenticationSuccess(
-            HttpServletRequest request, HttpServletResponse response, Authentication authentication
-    ) throws IOException, ServletException {
-        // 从认证对象中获取用户信息，并将其转换为 MyUserDetails 对象以便后续使用。(从loadUserByUsername方法返回的)
-        MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
-        Map<String, Object> userMap = new HashMap<String, Object>();
-        userMap.put("userId", myUserDetails.getId());
-        userMap.put("username", myUserDetails.getUsername());
-        userMap.put("password", myUserDetails.getPassword());
-        String token =
-                jwtUtil.createJwt(myUserDetails.getId(), myUserDetails.getUsername(), userMap);
+  @Override
+  public void onAuthenticationSuccess(
+      HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+      throws IOException, ServletException {
+    // 从认证对象中获取用户信息，并将其转换为 MyUserDetails 对象以便后续使用。(从loadUserByUsername方法返回的)
+    MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+    Map<String, Object> userMap = new HashMap<String, Object>();
+    userMap.put("userId", myUserDetails.getId());
+    userMap.put("username", myUserDetails.getUsername());
+    userMap.put("password", myUserDetails.getPassword());
+    String token = jwtUtil.createJwt(myUserDetails.getId(), myUserDetails.getUsername(), userMap);
     System.out.println(token);
-        redisUtil.set(myUserDetails.getId(), token, 300);
-        ObjectMapper objectMapper = new ObjectMapper();
-        Result result = Result.success(token);
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(result));
-        response.getWriter().flush();
-        response.getWriter().close();
-    }
+    redisUtil.set(myUserDetails.getId(), token, 300);
+    ObjectMapper objectMapper = new ObjectMapper();
+    Result result = Result.success(token);
+    response.setContentType("application/json;charset=UTF-8");
+    response.getWriter().write(objectMapper.writeValueAsString(result));
+    response.getWriter().flush();
+    response.getWriter().close();
+  }
 }

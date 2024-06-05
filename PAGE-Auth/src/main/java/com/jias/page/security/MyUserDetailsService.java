@@ -17,23 +17,21 @@ import org.springframework.stereotype.Service;
  * @date 2024/4/29
  * @description
  */
-@Component
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    /*
-    * UserDetailsService：提供查询用户功能，如根据用户名查询用户，并返回UserDetails
-    * UserDetails，SpringSecurity定义的类， 记录用户信息，如用户名、密码、权限等
-    *
-     */
+  /*
+   * UserDetailsService：提供查询用户功能，如根据用户名查询用户，并返回UserDetails
+   * UserDetails，SpringSecurity定义的类， 记录用户信息，如用户名、密码、权限等
+   *
+   */
 
-   @Autowired
-   ISysUserService sysUserService;
+  @Autowired ISysUserService sysUserService;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser sysUser = sysUserService.getUserByUsername(username);
-        MyUserDetails myUserDetails = new MyUserDetails(sysUser);
-        return myUserDetails;
-    }
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    SysUser sysUser = sysUserService.getUserByUsername(username);
+    MyUserDetails myUserDetails = new MyUserDetails(sysUser);
+    return myUserDetails;
+  }
 }
