@@ -2,7 +2,7 @@ package com.jias.page.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jias.page.service.IUserService;
+import com.jias.page.service.ISysUserService;
 import com.jias.page.utils.resultUtil.Result;
 import com.jias.page.enums.ResultEnum;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    IUserService userService;
+    ISysUserService userService;
 
     @GetMapping("/download")
     public void downloadFile(HttpServletResponse response){

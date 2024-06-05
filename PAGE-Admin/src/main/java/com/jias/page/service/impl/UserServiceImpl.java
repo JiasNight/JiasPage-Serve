@@ -2,10 +2,16 @@ package com.jias.page.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jias.page.config.TransferConfig;
 import com.jias.page.domain.User;
 import com.jias.page.mapper.UserMapper;
+import com.jias.page.service.ISysUserService;
 import com.jias.page.service.IUserService;
+import com.jias.page.utils.cryptionUtil.AESUtil;
+import com.jias.page.utils.md5Util.MD5Util;
+import com.jias.page.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +27,9 @@ public class UserServiceImpl implements IUserService {
 
     @Resource
     UserMapper userMapper;
+
+    @Autowired
+    TransferConfig transferConfig;
 
     /**
      * 获取用户信息列表
@@ -45,25 +54,25 @@ public class UserServiceImpl implements IUserService {
      * @return boolean
      */
     @Override
-    public boolean addUserInfo(User user) {
+    public Result addUserInfo(User user) {
         try {
             user.setUserId(UUID.randomUUID().toString());
             String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
             user.setCreateTime(time);
             user.setUpdateTime(time);
             user.setIsDeleted(0);
+            String md5Password = AESUtil.decrypt(user.getPassword(), transferConfig.getAesKey());
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            String userPassword = user.getUserPassword();
-            String encode = bCryptPasswordEncoder.encode(userPassword);
-            user.setUserPassword(encode);
+            String encodePassword = bCryptPasswordEncoder.encode(md5Password);
+            user.setPassword(encodePassword);
             int i = userMapper.addUserInfo(user);
             if (i > 0) {
-                return true;
+                return Result.success();
             } else {
-                return false;
+                return Result.failure();
             }
         } catch (Exception e) {
-            return false;
+            return Result.failure(e.getMessage());
         }
     }
 

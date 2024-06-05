@@ -4,6 +4,13 @@ spring:
     user:
       name: jias
       password: jias
+  permit-all-path:
+    - /auth/**
+    - /swagger-ui.html
+    - /webjars/**
+    - /swagger-resources/**
+    - /v2/*
+    - /csrf
   # redis
   redis:
     # Redis服务器地址

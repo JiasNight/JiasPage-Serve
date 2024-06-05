@@ -1,8 +1,15 @@
 package com.jias.page.service;
 
+import com.jias.page.domain.SignInUser;
+import com.jias.page.domain.SysUser;
 import com.jias.page.domain.vo.UserInfo;
 
-public interface IUserService {
+import java.util.Map;
+
+public interface ISysUserService {
+
+
+    String userSigIn(SignInUser signInUser);
 
   /** 获取用户信息 */
   UserInfo getUserInfo(String token);
@@ -11,5 +18,5 @@ public interface IUserService {
   UserInfo getUserById(String userId);
 
  /** 通过用户名获取用户 */
- UserInfo getUserByUsername(String username);
+ SysUser getUserByUsername(String username);
 }

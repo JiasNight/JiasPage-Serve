@@ -40,7 +40,7 @@ public class Result {
   // 返回成功
   public static Result success(ResultEnum resultEnum) {
     Result result = new Result();
-    result.setSuccess(false);
+    result.setSuccess(true);
     result.setResultEnum(resultEnum);
     result.setTimestamp(timeFormat());
     return result;

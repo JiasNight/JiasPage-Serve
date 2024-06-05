@@ -1,7 +1,9 @@
 package com.jias.page.security.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jias.page.enums.ResultEnum;
 import com.jias.page.utils.jwtUtil.JWTUtil;
+import com.jias.page.utils.resultUtil.Result;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,9 +23,10 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain
     ) throws ServletException, IOException {
-        //  从header中获取验证信息
+        //  从header中获取token
         String authHeader = request.getHeader(JWTUtil.AUTH_HEADER_KEY);
         if (ObjectUtils.isEmpty(authHeader)) {
+            // 没有携带 token 则 放行
             filterChain.doFilter(request, response);
             return;
         }
@@ -33,23 +36,30 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
     private void doParse(
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String authHeader
     ) throws ServletException, IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json;charset=UTF-8");
         try{
-            //  如果认证码  以规定值开头
+            //  如果认证码以规定值开头
             if (authHeader.startsWith(JWTUtil.TOKEN_PREFIX)) {
                 // 提取token值
                 String token = authHeader.substring(JWTUtil.TOKEN_PREFIX.length());
                 if (ObjectUtils.isEmpty(token)) {
-                    filterChain.doFilter(request, response);
-                    return;
+                    Result result = Result.failure(ResultEnum.PERMISSION_TOKEN_EXPIRED);
+                    response.getWriter().write(objectMapper.writeValueAsString(result));
                 } else {
-                    JWTUtil.isExpiration(token);
+                    // 检查 token 是否过期
+                    boolean expiration = JWTUtil.isExpiration(token);
+                    if (expiration) {
+                        Result result = Result.failure(ResultEnum.PERMISSION_TOKEN_EXPIRED);
+                        response.getWriter().write(objectMapper.writeValueAsString(result));
+                    }
                 }
             }
+            // 放行
             filterChain.doFilter(request, response);
         } catch (Exception e) {
-            response.setStatus(200);
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(ResultEnum.PERMISSION_TOKEN_ILLEGAL.getMessage());
+            Result result = Result.failure(ResultEnum.PERMISSION_TOKEN_INVALID);
+            response.getWriter().write(objectMapper.writeValueAsString(result));
         }
     }
 }

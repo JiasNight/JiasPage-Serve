@@ -16,14 +16,19 @@ public enum ResultEnum {
   // 服务器操作失败
   ERROR(500, "服务器内部错误"),
 
-  //  登录
+  // 登录成功
+  SIGN_IN_SUCCESS(200, "登录成功"),
+  // 登录失败
   SIGN_IN_FAILURE(409, "登录失败"),
+  //  登出
+  SIGN_OUT_SUCCESS(410, "登出成功"),
 
   /* 业务错误 */
   NO_PERMISSION(401, "没有权限"),
   NO_SERVER(403, "服务器拒绝请求"),
   NO_FIND(404, "服务器找不到请求的网页"),
   NO_FUN(405, "禁用请求中指定的方法"),
+  NO_SIGN_IN(406, "请登录"),
   // 下载失败
   DOWNLOAD_ERROR(600, "下载失败"),
 
@@ -36,7 +41,7 @@ public enum ResultEnum {
   PARAM_TYPE_ERROR(1003, "参数类型错误"),
   PARAM_NOT_COMPLETE(1004, "参数缺失"),
 
-  PERMISSION_TOKEN_EXPIRED(3001, "token过期"),
+  PERMISSION_TOKEN_EXPIRED(3001, "token过期，请重新登录"),
   PERMISSION_TOKEN_INVALID(3002, "token解析异常"),
   PERMISSION_TOKEN_ILLEGAL(3002, "token非法"),
   PERMISSION_SIGNATURE_ERROR(3003, "签名失败"),

@@ -8,13 +8,10 @@ import cn.hutool.core.util.IdUtil;
 import com.jias.page.config.TransferConfig;
 import com.jias.page.domain.SignInUser;
 import com.jias.page.domain.vo.UserInfo;
-import com.jias.page.service.ISignInService;
-import com.jias.page.service.IUserService;
+import com.jias.page.service.ISysUserService;
 import com.jias.page.utils.redisUtil.RedisConfigProperties;
 import com.jias.page.utils.redisUtil.RedisUtil;
 import com.jias.page.utils.resultUtil.Result;
-import com.jias.page.enums.ResultEnum;
-import com.jias.page.utils.resultUtil.ResultEnumUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +26,8 @@ import java.util.Map;
 @RequestMapping("/user")
 public class SysUserController {
 
-  @Autowired ISignInService signInService;
-
-  @Autowired IUserService userService;
+  @Autowired
+  ISysUserService sysUserService;
 
   @Autowired
   TransferConfig transferConfig;
@@ -45,15 +41,16 @@ public class SysUserController {
   @Operation(summary  = "用户登陆")
   @PostMapping("/signIn")
   public Result singIn(@RequestBody SignInUser signInUser) {
-    Map<String, Object> resultMap = signInService.userIsSigIn(signInUser);
-    if (resultMap.get("isSignIn").equals("true")) {
-      Map<String, String> tMap = new HashMap<String, String>();
-      tMap.put("token", resultMap.get("token").toString());
-      return Result.success(tMap);
-    } else {
-      return Result.failure(
-          ResultEnumUtil.getByCode((Integer) resultMap.get("code"), ResultEnum.class));
-    }
+    String token = sysUserService.userSigIn(signInUser);
+    return Result.success(token);
+    // if (resultMap.get("isSignIn").equals("true")) {
+    //   Map<String, String> tMap = new HashMap<String, String>();
+    //   tMap.put("token", resultMap.get("token").toString());
+    //   return Result.success(tMap);
+    // } else {
+    //   return Result.failure(
+    //       ResultEnumUtil.getByCode((Integer) resultMap.get("code"), ResultEnum.class));
+    // }
   }
 
   @Operation(summary  = "获取验证码")
@@ -121,7 +118,7 @@ public class SysUserController {
   @Operation(summary  = "通过token获取用户信息")
   @GetMapping("/getUserInfo")
   public Result getUserInfo(@RequestParam("token") String token) {
-    UserInfo userInfo = userService.getUserInfo(token);
+    UserInfo userInfo = sysUserService.getUserInfo(token);
     return Result.success(userInfo);
   }
 }

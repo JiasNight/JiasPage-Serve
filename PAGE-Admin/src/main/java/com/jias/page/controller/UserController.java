@@ -1,14 +1,14 @@
 package com.jias.page.controller;
 
 
-import com.jias.page.domain.vo.MenuVo;
+import com.jias.page.domain.User;
 import com.jias.page.domain.vo.UserPageVo;
+import com.jias.page.service.ISysUserService;
 import com.jias.page.service.IUserService;
 import com.jias.page.utils.resultUtil.Result;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/system/user")
@@ -25,5 +25,11 @@ public class UserController {
         } catch (Exception e) {
             return Result.failure("获取用户列表失败！");
         }
+    }
+
+    @Operation(summary  = "用户注册")
+    @PostMapping("/signUp")
+    public Result newAddUser(@RequestBody User user) {
+        return userService.addUserInfo(user);
     }
 }

@@ -2,6 +2,7 @@ package com.jias.page.controller;
 
 import com.jias.page.domain.User;
 import com.jias.page.utils.redisUtil.RedisUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Tag(name = "redis")
 @RequestMapping(value = "/redis")
 public class RedisController {
 

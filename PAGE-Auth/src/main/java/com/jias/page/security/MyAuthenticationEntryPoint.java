@@ -28,8 +28,8 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
             HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
     ) throws IOException, ServletException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Result result = new Result();
-        result.failure(ResultEnum.NO_PERMISSION.getMessage());
+        Result result = Result.failure(ResultEnum.NO_SIGN_IN);
+        // Result result = Result.failure(authException.getMessage());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(result));
         response.getWriter().flush();

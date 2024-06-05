@@ -57,6 +57,15 @@ mybatis-plus:
       # 删除后
       logic-delete-value: 1
 
+# 是否开启加密传输模式
+net-transfer:
+  #  请求加密
+  request-safe: false
+  #  响应加密
+  response-safe: false
+  # 默认AES的key
+  aes-key: def009A1bcO538JK
+
 # 日志
 logging:
   file:

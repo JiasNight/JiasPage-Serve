@@ -4,26 +4,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jias.page.enums.ResultEnum;
 import com.jias.page.utils.resultUtil.Result;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.session.SessionInformationExpiredEvent;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import java.io.IOException;
 
 /**
  * @author JSON
- * @date 2024/4/25
+ * @date 2024/5/31
  * @description
  */
-public class MyAccessDeniedHandler implements AccessDeniedHandler {
+public class MySessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {
     @Override
-    public void handle(
-            HttpServletRequest request, HttpServletResponse response,
-            AccessDeniedException accessDeniedException
-    ) throws IOException {
+    public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Result result = Result.failure(ResultEnum.NO_PERMISSION);
+        Result result = Result.success(ResultEnum.SIGN_OUT_SUCCESS);
+        HttpServletResponse response = event.getResponse();
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(result));
         response.getWriter().flush();

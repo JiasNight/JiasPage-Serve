@@ -8,12 +8,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 /**
  * @author JSON
  * @date 2024/4/29
  * @description 自定义认证
  */
+@Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
@@ -28,9 +30,13 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
-        boolean matches = myPasswordEncoder.matches(password, userDetails.getPassword());
-        if(!matches){
-            throw new AuthenticationException("User password error."){};
+        try{
+            boolean matches = myPasswordEncoder.matches(password, userDetails.getPassword());
+            if(!matches){
+                throw new AuthenticationException("用户名或密码错误！"){};
+            }
+        } catch (Exception e) {
+            throw new AuthenticationException("用户名或密码错误！"){};
         }
         return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
     }

@@ -1,5 +1,6 @@
 package com.jias.page.security.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jias.page.enums.ResultEnum;
 import com.jias.page.utils.jwtUtil.JWTUtil;
 import com.jias.page.utils.resultUtil.Result;
@@ -25,10 +26,10 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     ) throws IOException {
         String authHeader = request.getHeader(JWTUtil.AUTH_HEADER_KEY);
         String authToken = authHeader.substring(JWTUtil.TOKEN_PREFIX.length());
-        Result result = new Result();
-        result.setCode(ResultEnum.SUCCESS.getCode());
-        result.setMessage(ResultEnum.SUCCESS.getMessage());
+        ObjectMapper objectMapper = new ObjectMapper();
+        Result result = Result.success(ResultEnum.SIGN_OUT_SUCCESS);
         response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(result));
         response.getWriter().flush();
         response.getWriter().close();
     }

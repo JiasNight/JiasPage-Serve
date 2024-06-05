@@ -3,6 +3,7 @@ package com.jias.page.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jias.page.domain.User;
+import com.jias.page.utils.resultUtil.Result;
 
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public interface IUserService {
      * @param user 用户实体
      * @return boolean
      */
-    boolean addUserInfo(User user);
+    Result addUserInfo(User user);
 
     /**
      * 删除用户
