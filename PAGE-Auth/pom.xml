@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>JiasPage-Serve</artifactId>
-        <groupId>com.jias.page</groupId>
+        <groupId>com.page</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -14,8 +14,9 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- 引入公共模块 -->
         <dependency>
-            <groupId>com.jias.page</groupId>
+            <groupId>com.page</groupId>
             <artifactId>PAGE-Common</artifactId>
         </dependency>
     </dependencies>

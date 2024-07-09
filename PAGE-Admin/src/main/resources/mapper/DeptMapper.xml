@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.page.admin.mapper.DeptMapper">
+
+    <resultMap id="roleMap" type="Role">
+        <result property="id" column="id"></result>
+        <result property="code" column="code"></result>
+        <result property="name" column="name"></result>
+        <result property="description" column="description"></result>
+        <result property="isDeleted" column="is_deleted"></result>
+        <result property="createBy" column="create_by"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
+    </resultMap>
+
+    <!-- 查询菜单列表-->
+    <select id="getDeptData" parameterType="string" resultType="Dept">
+        select id, pid, code, `name`, description, `order`, status, create_by, create_time, update_by, update_time
+        from sys_dept
+        where is_deleted = '0'
+    </select>
+
+    <insert id="addDeptInfo">
+        insert into sys_dept (id, pid, code, `name`, description, `order`, `status`, is_deleted, create_by, create_time, update_by, update_time)
+        values (#{id}, #{pid}, #{code}, #{name}, #{description}, #{order}, #{status}, #{isDeleted}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+    </insert>
+
+    <update id="updateDeptInfo" parameterType="Role">
+        update sys_dept
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="order != null">`order` = #{order},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+
+    </update>
+
+    <update id="delDeptInfo" parameterType="string">
+        update sys_dept
+        set is_deleted='1'
+        where id = #{id}
+    </update>
+
+
+</mapper>

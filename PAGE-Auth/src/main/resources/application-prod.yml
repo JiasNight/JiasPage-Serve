@@ -1,0 +1,36 @@
+
+server:
+  port: 9901
+  servlet:
+    context-path: /auth
+
+spring:
+  application:
+    # 应用名称
+    name: page-auth
+  config:
+    activate:
+      on-profile: prod
+  # mysql数据库,生产环境
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.81.4.63:3306/pagedb?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  # redis配置
+  redis:
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379
+    # Redis数据库索引（默认为0）
+    # Redis服务器连接密码（默认为空）
+    password: ''
+
+logging:
+  file:
+    path: logs/auth
+  level:
+    com.page.auth: debug
+
+

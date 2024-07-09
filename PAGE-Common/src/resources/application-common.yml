@@ -1,0 +1,89 @@
+
+spring:
+  config:
+    activate:
+      on-profile: common
+  devtools:
+    livereload:
+      port: 35729
+  # security
+  security:
+    user:
+      name: jias
+      password: jias
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+# mybatis配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: com.page.*.domain
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 全局逻辑删除的字段名
+      logic-delete-field: isDeleted
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    # 配置swagger-ui的界面访问路径
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'PAGE'
+      paths-to-match: '/**'
+      # 包的扫描需要修改对应位置
+      packages-to-scan: com.page
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# 密码加密配置
+jasypt:
+  encryptor:
+    # 指定加密密钥，生产环境请放到启动参数里面
+    password: JiasPage
+    algorithm: PBEWithMD5AndDES
+    property:
+    # 算法识别的前后缀，默认ENC()，包含在前后缀的加密信息，会使用指定算法解密
+#      prefix: "ENC@["
+#      suffix: "]"
+
+# jwt配置
+jwt:
+  # 签发者
+  issuer: jias
+  auth-header-key: Authorization
+  #  token开始字符
+  token-prefix: Bearer
+  # 密钥
+  secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+  # 过期时间，时间戳,毫秒
+  expires-time: 1800000
+
+# 是否开启加密传输模式
+net-transfer:
+  #  请求加密
+  request-safe: false
+  #  响应加密
+  response-safe: false
+  # 默认AES的key
+  aes-key: def009A1bcO538JK
+
+
