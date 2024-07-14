@@ -1,8 +1,4 @@
-
 spring:
-  config:
-    activate:
-      on-profile: common
   devtools:
     livereload:
       port: 35729
@@ -16,14 +12,14 @@ spring:
       max-file-size: -1
       max-request-size: -1
 
-# mybatis配置
+# mybatis-plus配置
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:mapper/**/*Mapper.xml
-  type-aliases-package: com.page.*.domain
+  type-aliases-package: com.page.admin.domain.entity
   global-config:
     # 逻辑删除配置
     db-config:
@@ -75,7 +71,7 @@ jwt:
   # 密钥
   secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
   # 过期时间，时间戳,毫秒
-  expires-time: 1800000
+  expires-time: 2800000
 
 # 是否开启加密传输模式
 net-transfer:

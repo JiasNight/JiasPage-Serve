@@ -35,14 +35,11 @@ import redis.clients.jedis.Jedis;
 @Component
 public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
 
-  @Resource
-  RedisConfiguration redisConfiguration;
+  @Resource RedisConfiguration redisConfiguration;
 
-  @Resource
-  JwtConfiguration jwtConfiguration;
+  @Resource JwtConfiguration jwtConfiguration;
 
-  @Resource
-  JwtUtil jwtUtil;
+  @Resource JwtUtil jwtUtil;
 
   @Override
   protected void doFilterInternal(
@@ -93,7 +90,9 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
             long exists = jedis.exists("page_user_agent:" + sysUser.getUserId(), token);
             if (exists == 1) {
               MyUserDetails myUserDetails = new MyUserDetails(sysUser);
-              UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(sysUser, null, myUserDetails.getAuthorities());
+              UsernamePasswordAuthenticationToken authRequest =
+                  new UsernamePasswordAuthenticationToken(
+                      sysUser, null, myUserDetails.getAuthorities());
               SecurityContextHolder.getContext().setAuthentication(authRequest);
               request.setAttribute("uid", claims.getId());
             } else {
@@ -127,6 +126,5 @@ public class MyAuthenticationTokenFilter extends OncePerRequestFilter {
     if (!sessionCode.equalsIgnoreCase(code)) {
       throw new ServerException("验证码输入错误！");
     }
-
   }
 }

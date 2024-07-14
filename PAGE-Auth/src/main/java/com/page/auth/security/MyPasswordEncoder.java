@@ -6,6 +6,8 @@ import com.page.common.utils.md5Util.Md5Util;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class MyPasswordEncoder implements PasswordEncoder {
   private Logger logger = LoggerFactory.getLogger(getClass());
 
-  @Resource TransferConfiguration transferConfiguration;
+  @Autowired TransferConfiguration transferConfiguration;
 
   // private final static String transferConfig = "def009A1bcO538JK";
 
@@ -46,6 +48,7 @@ public class MyPasswordEncoder implements PasswordEncoder {
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     String password = rawPassword.toString();
     // 通过AES解密得到原始密码md5加密的字符串
+    System.out.println("解密的AESKey配置为：" + transferConfiguration.getAesKey());
     String MD5Password = AesUtil.decrypt(password, transferConfiguration.getAesKey());
     logger.info("密码解密使用的AES_KEY:" + transferConfiguration.getAesKey());
     // 再通过security加密得到加密的密码字符串

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.page.admin.mapper.RoleMapper">
 
-    <resultMap id="roleMap" type="Role">
+    <resultMap id="roleMap" type="com.page.admin.domain.entity.Role">
         <result property="id" column="id"></result>
         <result property="code" column="code"></result>
         <result property="name" column="name"></result>
@@ -15,15 +15,23 @@
     </resultMap>
 
     <!-- 查询菜单列表-->
-    <select id="getRoleList" parameterType="string" resultType="Role">
-        select id, code, name, description, create_by, create_time, update_by, update_time
+    <select id="getRoleList" parameterType="string" resultType="com.page.admin.domain.entity.Role">
+        select id,
+               code,
+               name,
+               description,
+               create_by,
+               create_time,
+               update_by,
+               update_time
         from sys_role
         where is_deleted = '0'
     </select>
 
     <insert id="addRoleInfo">
         insert into sys_role (id, code, name, description, is_deleted, create_by, create_time, update_by, update_time)
-        values (#{id}, #{code}, #{name}, #{description}, #{isDeleted}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+        values (#{id}, #{code}, #{name}, #{description}, #{isDeleted}, #{createBy}, #{createTime}, #{updateBy},
+        #{updateTime})
         <!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
         <!--            <if test="id != null and id != ''">`id`,</if>-->
         <!--            <if test="code != null and code != ''">`code`,</if>-->
@@ -48,7 +56,7 @@
         <!--        </trim>-->
     </insert>
 
-    <update id="updateRoleInfo" parameterType="Role">
+    <update id="updateRoleInfo" parameterType="com.page.admin.domain.entity.Role">
         update sys_role
         <trim prefix="SET" suffixOverrides=",">
             <if test="id != null">`id` = #{id},</if>

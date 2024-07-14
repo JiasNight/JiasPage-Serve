@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--继承父包-->
     <parent>
         <artifactId>JiasPage-Serve</artifactId>
         <groupId>com.page</groupId>
@@ -9,14 +10,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.page</groupId>
     <artifactId>PAGE-Common</artifactId>
-    <packaging>jar</packaging>
+    <description>公共模块</description>
 
     <properties>
         <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <nacos-config-spring-boot.version>0.2.1</nacos-config-spring-boot.version>
     </properties>
 
     <dependencies>
@@ -97,11 +96,6 @@
         </dependency>
 
         <!-- mybatis-plus依赖 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.baomidou</groupId>-->
-        <!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-        <!--            <version>3.2.0</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

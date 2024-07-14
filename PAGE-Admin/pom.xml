@@ -9,14 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.page</groupId>
     <artifactId>PAGE-Admin</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>com.page</groupId>
-            <artifactId>PAGE-Common</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.page</groupId>
             <artifactId>PAGE-Auth</artifactId>

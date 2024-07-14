@@ -1,4 +1,3 @@
-
 server:
   port: 9901
   servlet:
@@ -10,7 +9,7 @@ spring:
     name: page-auth
   config:
     activate:
-#      on-profile: @profiles.active@,@commonactive@
+      # on-profile: @profiles.active@,@commonactive@
       on-profile: dev
   # mysql数据库
   datasource:
@@ -27,6 +26,27 @@ spring:
     # Redis数据库索引（默认为0）
     # Redis服务器连接密码（默认为空）
     password: ''
+
+#  jwt配置
+jwt:
+  # 签发者
+  issuer: jias
+  auth-header-key: Authorization
+  #  token开始字符
+  token-prefix: Bearer
+  # 密钥
+  secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+  # 过期时间，时间戳,毫秒
+  expires-time: 1800000
+
+#  是否开启加密传输模式
+net-transfer:
+  #  请求加密
+  request-safe: false
+  #  响应加密
+  response-safe: false
+  # 默认AES的key
+  aes-key: def009A1bcO538JK
 
 logging:
   file:

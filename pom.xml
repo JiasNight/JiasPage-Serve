@@ -15,9 +15,29 @@
     <groupId>com.page</groupId>
     <artifactId>JiasPage-Serve</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>JiasPage-Serve</name>
+
+    <!-- 设置打包方式为pom -->
     <packaging>pom</packaging>
 
-    <!--自动生成的子模块依赖-->
+    <properties>
+        <java.version>17</java.version>
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <druid.version>1.2.13</druid.version>
+        <mybatisplus.version>3.5.5</mybatisplus.version>
+        <mybatis.spring>3.0.3</mybatis.spring>
+        <sqlserver.version>4.0</sqlserver.version>
+        <oracle.version>11.2.0.3</oracle.version>
+        <dameng.version>8.1.2.79</dameng.version>
+        <hutool.version>5.8.28</hutool.version>
+        <jsoup.version>1.15.3</jsoup.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <javax.servlet.version>4.0.1</javax.servlet.version>
+    </properties>
+
+    <!--子模块-->
     <modules>
         <module>PAGE-Common</module>
         <module>PAGE-Auth</module>
@@ -25,28 +45,28 @@
         <module>PAGE-Admin</module>
     </modules>
 
-<!--    <profiles>-->
-<!--        <profile>-->
-<!--            <id>dev</id>-->
-<!--            <properties>-->
-<!--                <profiles.active>dev</profiles.active>-->
-<!--                <commonactive>common</commonactive>-->
-<!--            </properties>-->
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
-<!--        </profile>-->
-<!--        <profile>-->
-<!--            <id>prod</id>-->
-<!--            <properties>-->
-<!--                <profiles.active>prod</profiles.active>-->
-<!--                <commonactive>common</commonactive>-->
-<!--            </properties>-->
-<!--            <activation>-->
-<!--                <activeByDefault>false</activeByDefault>-->
-<!--            </activation>-->
-<!--        </profile>-->
-<!--    </profiles>-->
+    <!--    <profiles>-->
+    <!--        <profile>-->
+    <!--            <id>dev</id>-->
+    <!--            <properties>-->
+    <!--                <profiles.active>dev</profiles.active>-->
+    <!--                <commonactive>common</commonactive>-->
+    <!--            </properties>-->
+    <!--            <activation>-->
+    <!--                <activeByDefault>true</activeByDefault>-->
+    <!--            </activation>-->
+    <!--        </profile>-->
+    <!--        <profile>-->
+    <!--            <id>prod</id>-->
+    <!--            <properties>-->
+    <!--                <profiles.active>prod</profiles.active>-->
+    <!--                <commonactive>common</commonactive>-->
+    <!--            </properties>-->
+    <!--            <activation>-->
+    <!--                <activeByDefault>false</activeByDefault>-->
+    <!--            </activation>-->
+    <!--        </profile>-->
+    <!--    </profiles>-->
 
     <!--版本统一声明，声明子模块的版本号-->
     <dependencyManagement>

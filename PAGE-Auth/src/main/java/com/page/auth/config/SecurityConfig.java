@@ -180,7 +180,8 @@ public class SecurityConfig {
                         "/favicon.ico")
                     .permitAll()
                     // 开放两个接口，一个注册，一个登录，其余均要身份认证
-                    .requestMatchers("/security/validateCode", "/security/pKey", "/system/user/signUp")
+                    .requestMatchers(
+                        "/security/validateCode", "/security/pKey", "/system/user/signUp")
                     .permitAll()
                     // 允许任意请求被已登录用户访问，不检查Authority
                     .anyRequest()
@@ -196,6 +197,7 @@ public class SecurityConfig {
                     // 如果是认证过程中出现的异常会被封装成AuthenticationException然后调用AuthenticationEntryPoint对象的方法去进行异常处理。
                     // 如果是授权过程中出现的异常会被封装成AccessDeniedException然后调用AccessDeniedHandler对象的方法去进行异常处理。
                     .authenticationEntryPoint(myAuthenticationEntryPoint))
+        //        .authenticationProvider(myCustomAuthenticationProvider());
         .authenticationManager(authenticationManager());
 
     // 加我们自定义的token过滤器，去过滤接口请
