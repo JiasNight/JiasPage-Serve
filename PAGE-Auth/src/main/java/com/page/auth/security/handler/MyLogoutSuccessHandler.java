@@ -29,10 +29,8 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(
             HttpServletRequest request, HttpServletResponse response, Authentication authentication
     ) throws IOException {
-        String authHeader = request.getHeader(jwtConfiguration.getAuthHeaderKey());
-        String authToken = authHeader.substring(jwtConfiguration.getTokenPrefix().length());
         ObjectMapper objectMapper = new ObjectMapper();
-        Result result = Result.success(ResultEnum.SIGN_OUT_SUCCESS);
+        Result result = Result.success("退出成功");
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(result));
         response.getWriter().flush();

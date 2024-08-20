@@ -16,7 +16,6 @@ public class UserController {
 
   @PostMapping("/list")
   public Result getUserList(@RequestBody UserPageVo userPageVo) {
-    System.out.println(userPageVo.getPageSize());
     return userService.getUserList(userPageVo);
   }
 

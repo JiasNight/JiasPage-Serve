@@ -162,9 +162,7 @@ public class SecurityConfig {
                     .successHandler(myAuthenticationSuccessHandler)
                     // 登录失败处理器
                     .failureHandler(myAuthenticationFailureHandler)
-                    .permitAll())
-        // 配置退出登录的行为
-        .logout(logout -> logout.logoutUrl("/logout").logoutSuccessHandler(myLogoutSuccessHandler));
+                    .permitAll());
 
     httpSecurity
         //  授权过滤器
@@ -207,7 +205,7 @@ public class SecurityConfig {
     // 退出
     httpSecurity.logout(
         logout -> {
-          logout.logoutUrl("/logout").logoutSuccessHandler(myLogoutSuccessHandler);
+          logout.logoutUrl("/system/logout").logoutSuccessHandler(myLogoutSuccessHandler);
         });
 
     // 跨域
