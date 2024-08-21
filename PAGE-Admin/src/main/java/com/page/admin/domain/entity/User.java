@@ -1,43 +1,44 @@
-package com.page.admin.domain.vo;
+package com.page.admin.domain.entity;
 
-/**
- * @author JSON
- * @date 2024/8/13
- * @description
- */
-public class UserListVo {
+import com.page.common.domain.BaseEntity;
 
+public class User extends BaseEntity {
+
+  /** 用户id */
   private String userId;
 
+  /** 用户账号 */
   private String username;
 
+  /** 密码 */
+  private String password;
+
+  /** 用户昵称 */
   private String nickname;
 
+  /** 电子邮箱 */
   private String email;
 
+  /** 电话号码 */
   private String phone;
 
+  /** 用户性别，0男，1女 */
   private Integer gender;
 
+  /** 出生日期 */
   private String birthday;
 
-  private String cityId;
+  /** 城市id */
+  private Integer cityId;
 
-  private String cityName;
-
+  /** 用户头像 */
   private String avatar;
 
-  private String remarks;
-
+  /** 用户状态，0正常，1停用 */
   private Integer status;
 
-  private String createTime;
-
-  private String createBy;
-
-  private String updateBy;
-
-  private String updateTime;
+  /** 备注 */
+  private String remarks;
 
   public String getUserId() {
     return userId;
@@ -53,6 +54,14 @@ public class UserListVo {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getNickname() {
@@ -95,20 +104,12 @@ public class UserListVo {
     this.birthday = birthday;
   }
 
-  public String getCityId() {
+  public Integer getCityId() {
     return cityId;
   }
 
-  public void setCityId(String cityId) {
+  public void setCityId(Integer cityId) {
     this.cityId = cityId;
-  }
-
-  public String getCityName() {
-    return cityName;
-  }
-
-  public void setCityName(String cityName) {
-    this.cityName = cityName;
   }
 
   public String getAvatar() {
@@ -125,38 +126,6 @@ public class UserListVo {
 
   public void setStatus(Integer status) {
     this.status = status;
-  }
-
-  public String getCreateTime() {
-    return createTime;
-  }
-
-  public void setCreateTime(String createTime) {
-    this.createTime = createTime;
-  }
-
-  public String getCreateBy() {
-    return createBy;
-  }
-
-  public void setCreateBy(String createBy) {
-    this.createBy = createBy;
-  }
-
-  public String getUpdateBy() {
-    return updateBy;
-  }
-
-  public void setUpdateBy(String updateBy) {
-    this.updateBy = updateBy;
-  }
-
-  public String getUpdateTime() {
-    return updateTime;
-  }
-
-  public void setUpdateTime(String updateTime) {
-    this.updateTime = updateTime;
   }
 
   public String getRemarks() {

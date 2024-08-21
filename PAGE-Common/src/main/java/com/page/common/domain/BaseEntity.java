@@ -11,19 +11,23 @@ import java.io.Serializable;
  * @author JSON
  */
 public class BaseEntity implements Serializable {
-  
+
   private static final long serialVersionUID = 1L;
-  
+
   /** 创建者 */
+  @TableField(value = "create_by")
   private String createBy;
 
   /** 创建时间 */
+  @TableField(value = "create_time")
   private String createTime;
 
   /** 更新者 */
+  @TableField(value = "update_by")
   private String updateBy;
 
   /** 更新时间 */
+  @TableField(value = "update_time")
   private String updateTime;
 
   /** 是否删除标志 默认为0，1已删除 */

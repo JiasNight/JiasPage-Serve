@@ -13,39 +13,48 @@
                city_id,
                avatar,
                remarks,
+               `status`,
                create_time,
-               create_by
+               create_by,
+               update_by,
+               update_time
         from sys_user
         where is_deleted = '0'
+        order by create_time DESC
     </select>
 
     <!-- 添加用户-->
-    <insert id="addUserInfo" parameterType="com.page.admin.domain.User">
-        insert into sys_user(user_id, username, password, nickname, email, phone, gender, birthday, city_id, avatar,
-                             remarks, is_deleted, create_time, update_time)
-        values (#{userId}, #{username}, #{password}, #{userNick}, #{userEmail}, #{userPhone}, #{userGender},
-                #{userBirthday}, #{userCity}, #{userAvatar}, #{userMarks}, #{isDeleted}, #{createTime}, #{updateTime})
+    <insert id="addUserInfo" parameterType="com.page.admin.domain.entity.User">
+        insert into sys_user(user_id, username, `password`, nickname, email, phone, gender, birthday, city_id, avatar,
+                             `status`, remarks, is_deleted, create_by, create_time, update_by, update_time)
+        values (#{userId}, #{username}, #{password}, #{nickname}, #{email}, #{phone}, #{gender},
+                #{birthday}, #{cityId}, #{avatar}, #{status}, #{remarks}, #{isDeleted}, #{createBy},
+                #{createTime},
+                #{updateBy},
+                #{updateTime})
     </insert>
 
     <!-- 删除用户-->
-    <update id="delUserInfo" parameterType="com.page.admin.domain.User">
+    <update id="delUserInfo" parameterType="com.page.admin.domain.entity.User">
         update sys_user
-        set is_deleted=#{is_deleted}
+        set is_deleted=#{isDeleted}
         where user_id = #{userId}
     </update>
 
     <!-- 修改用户信息-->
-    <update id="updateUserInfo" parameterType="com.page.admin.domain.User">
+    <update id="updateUserInfo" parameterType="com.page.admin.domain.entity.User">
         update sys_user
-        set username=#{userName},
-            nickname=#{userNick},
-            email=#{userEmail},
-            phone=#{userPhone},
-            gender=#{userGender},
-            birthday=#{userBirthday},
-            city_id=#{userCity},
-            avatar=#{userAvatar},
-            remarks=#{userMarks},
+        set username=#{username},
+            nickname=#{nickname},
+            email=#{email},
+            phone=#{phone},
+            gender=#{gender},
+            birthday=#{birthday},
+            city_id=#{cityId},
+            avatar=#{avatar},
+            remarks=#{remarks},
+            `status`=#{status},
+            update_by=#{updateBy},
             update_time=#{updateTime}
         where user_id = #{userId}
     </update>
@@ -60,7 +69,7 @@
                birthday    as userBirthday,
                city_id     as userCity,
                avatar      as userAvatar,
-               remarks       as userMarks,
+               remarks     as userMarks,
                create_time as createTime,
                update_time as updateTime
         from sys_user
