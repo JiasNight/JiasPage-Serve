@@ -27,6 +27,8 @@ public class UserListVo {
 
   private String avatar;
 
+  private Integer status;
+
   private String remarks;
 
   private String createTime;
@@ -111,6 +113,14 @@ public class UserListVo {
 
   public void setAvatar(String avatar) {
     this.avatar = avatar;
+  }
+
+  public Integer getStatus() {
+    return status;
+  }
+
+  public void setStatus(Integer status) {
+    this.status = status;
   }
 
   public String getRemarks() {
