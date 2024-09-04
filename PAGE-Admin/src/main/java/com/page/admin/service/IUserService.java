@@ -1,7 +1,10 @@
 package com.page.admin.service;
 
-import com.page.admin.domain.entity.User;
-import com.page.admin.domain.vo.UserPageVo;
+import com.page.admin.domain.dto.UserQueryDto;
+import com.page.admin.domain.entity.SysUser;
+import com.page.admin.domain.vo.UserListVo;
+import com.page.common.domain.PageResult;
+import com.page.common.domain.QueryPage;
 import com.page.common.utils.resultUtil.Result;
 
 public interface IUserService {
@@ -9,10 +12,10 @@ public interface IUserService {
   /**
    * 获取用户列表
    *
-   * @param userPageVo 条件查询参数
+   * @param queryPage 条件查询参数
    * @return 分页列表
    */
-  Result getUserList(UserPageVo userPageVo);
+  PageResult getUserList(QueryPage<UserQueryDto> queryPage);
 
   /**
    * 添加用户
@@ -20,7 +23,7 @@ public interface IUserService {
    * @param user 用户实体
    * @return boolean
    */
-  Result addUserInfo(User user);
+  Result addUserInfo(SysUser user);
 
   /**
    * 删除用户
@@ -36,7 +39,7 @@ public interface IUserService {
    * @param user 用户实体
    * @return boolean
    */
-  Result updateUserInfo(User user);
+  Result updateUserInfo(SysUser user);
 
   /**
    * 查询用户信息

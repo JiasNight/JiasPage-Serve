@@ -2,23 +2,27 @@ package com.page.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.page.admin.domain.entity.User;
+import com.page.admin.domain.dto.UserQueryDto;
+import com.page.admin.domain.entity.SysUser;
 import com.page.admin.domain.vo.UserListVo;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Map;
-
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<SysUser> {
 
   /**
    * 获取用户列表
    *
    * @return
    */
-  IPage<UserListVo> selectUserList(Page<UserListVo> page);
+  List<UserListVo> selectUserList(
+      @Param("page") IPage<UserListVo> page,
+      @Param("userQueryDto") UserQueryDto userQueryDto,
+      @Param("sort") String sort);
 
   /**
    * 添加用户
@@ -26,7 +30,7 @@ public interface UserMapper extends BaseMapper<User> {
    * @param user
    * @return
    */
-  int addUserInfo(User user);
+  int addUserInfo(SysUser user);
 
   /**
    * 删除用户
@@ -34,7 +38,7 @@ public interface UserMapper extends BaseMapper<User> {
    * @param user
    * @return
    */
-  int delUserInfo(User user);
+  int delUserInfo(SysUser user);
 
   /**
    * 修改用户
@@ -42,7 +46,7 @@ public interface UserMapper extends BaseMapper<User> {
    * @param user
    * @return
    */
-  int updateUserInfo(User user);
+  int updateUserInfo(SysUser user);
 
   Map selectUserInfoById(@Param("userId") String userId);
 }

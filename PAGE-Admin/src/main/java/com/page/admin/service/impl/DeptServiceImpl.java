@@ -4,7 +4,7 @@ import com.page.admin.domain.entity.Dept;
 import com.page.admin.domain.vo.DeptVo;
 import com.page.admin.mapper.DeptMapper;
 import com.page.admin.service.IDeptService;
-import com.page.auth.domain.SysUser;
+import com.page.auth.domain.entity.SysUser;
 import com.page.common.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.page.auth.domain;
+package com.page.auth.domain.entity;
 
 public class SysUser {
 
@@ -10,7 +10,6 @@ public class SysUser {
 
   /** 用户密码 */
   private String password;
-
 
   public String getUserId() {
     return userId;
@@ -35,5 +34,4 @@ public class SysUser {
   public void setPassword(String password) {
     this.password = password;
   }
-
 }

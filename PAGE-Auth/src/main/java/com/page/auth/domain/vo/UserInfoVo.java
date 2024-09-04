@@ -1,6 +1,6 @@
 package com.page.auth.domain.vo;
 
-public class UserInfo {
+public class UserInfoVo {
 
   private String userId;
 
@@ -18,7 +18,7 @@ public class UserInfo {
 
   private String city;
 
-  public UserInfo() {}
+  public UserInfoVo() {}
 
   public String getUserId() {
     return userId;

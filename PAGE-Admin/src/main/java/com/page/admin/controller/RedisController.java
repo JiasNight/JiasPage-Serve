@@ -1,6 +1,6 @@
 package com.page.admin.controller;
 
-import com.page.admin.domain.entity.User;
+import com.page.admin.domain.entity.SysUser;
 import com.page.common.utils.redisUtil.RedisUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -54,7 +54,7 @@ public class RedisController {
   @RequestMapping(value = "/setList", method = RequestMethod.GET)
   public boolean setList() {
     List<Object> stuList = new ArrayList<>();
-    User user = new User();
+    SysUser user = new SysUser();
     user.setUserId(UUID.randomUUID().toString());
     stuList.add(user);
     return redisUtil.lSetList("user", stuList);

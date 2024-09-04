@@ -2,7 +2,7 @@ package com.page.auth.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.page.auth.domain.MyUserDetails;
-import com.page.auth.domain.SysUser;
+import com.page.auth.domain.entity.SysUser;
 import com.page.common.configuration.JwtConfiguration;
 import com.page.common.configuration.RedisConfiguration;
 import com.page.common.enums.ResultEnum;
@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.rmi.ServerException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

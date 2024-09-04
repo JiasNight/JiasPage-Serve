@@ -2,7 +2,7 @@ package com.page.admin.domain.entity;
 
 import com.page.common.domain.BaseEntity;
 
-public class User extends BaseEntity {
+public class SysUser extends BaseEntity {
 
   /** 用户id */
   private String userId;

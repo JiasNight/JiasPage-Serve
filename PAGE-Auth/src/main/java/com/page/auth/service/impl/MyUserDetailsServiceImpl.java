@@ -1,7 +1,7 @@
 package com.page.auth.service.impl;
 
 import com.page.auth.domain.MyUserDetails;
-import com.page.auth.domain.SysUser;
+import com.page.auth.domain.entity.SysUser;
 import com.page.auth.service.IMyUserDetailsService;
 import com.page.auth.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +21,20 @@ import java.util.List;
  */
 @Service
 public class MyUserDetailsServiceImpl implements IMyUserDetailsService {
-    /*
-     * UserDetailsService：提供查询用户功能，如根据用户名查询用户，并返回UserDetails
-     * UserDetails，SpringSecurity定义的类， 记录用户信息，如用户名、密码、权限等
-     *
-     */
+  /*
+   * UserDetailsService：提供查询用户功能，如根据用户名查询用户，并返回UserDetails
+   * UserDetails，SpringSecurity定义的类， 记录用户信息，如用户名、密码、权限等
+   *
+   */
 
-    @Autowired
-    ISysUserService sysUserService;
+  @Autowired ISysUserService sysUserService;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser sysUser = sysUserService.getUserByUsername(username);
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        MyUserDetails myUserDetails = new MyUserDetails(sysUser, authorities);
-        return myUserDetails;
-    }
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    SysUser sysUser = sysUserService.getUserByUsername(username);
+    List<GrantedAuthority> authorities = new ArrayList<>();
+    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+    MyUserDetails myUserDetails = new MyUserDetails(sysUser, authorities);
+    return myUserDetails;
+  }
 }

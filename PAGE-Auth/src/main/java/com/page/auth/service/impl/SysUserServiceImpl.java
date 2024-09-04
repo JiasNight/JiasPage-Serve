@@ -1,8 +1,8 @@
 package com.page.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.page.auth.domain.SysUser;
-import com.page.auth.domain.vo.UserInfo;
+import com.page.auth.domain.entity.SysUser;
+import com.page.auth.domain.vo.UserInfoVo;
 import com.page.auth.mapper.SysUserMapper;
 import com.page.auth.service.ISysUserService;
 import com.page.common.configuration.TransferConfiguration;
@@ -19,14 +19,12 @@ public class SysUserServiceImpl implements ISysUserService {
 
   @Autowired RedisUtil redisUtil;
 
-  @Autowired
-  JwtUtil jwtUtil;
+  @Autowired JwtUtil jwtUtil;
 
-  @Autowired
-  TransferConfiguration transferConfiguration;
+  @Autowired TransferConfiguration transferConfiguration;
 
   @Override
-  public UserInfo getUserInfoById(String userId) {
+  public UserInfoVo getUserInfoById(String userId) {
     return sysUserMapper.getUserInfoByUserId(userId);
   }
 

@@ -1,22 +1,26 @@
 package com.page.admin.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.page.admin.domain.entity.User;
+import com.page.admin.domain.dto.UserQueryDto;
+import com.page.admin.domain.entity.SysUser;
 import com.page.admin.domain.vo.UserListVo;
-import com.page.admin.domain.vo.UserPageVo;
 import com.page.admin.mapper.UserMapper;
 import com.page.admin.service.IUserService;
-import com.page.auth.domain.SysUser;
+import com.page.common.base.BaseService;
 import com.page.common.configuration.TransferConfiguration;
+import com.page.common.domain.PageResult;
+import com.page.common.domain.QueryPage;
 import com.page.common.utils.cryptionUtil.AesUtil;
 import com.page.common.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,7 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends BaseService implements IUserService {
+
+  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  SysUser sysUser = (SysUser) authentication.getPrincipal();
 
   @Resource UserMapper userMapper;
 
@@ -37,20 +44,20 @@ public class UserServiceImpl implements IUserService {
   /**
    * 获取用户信息列表
    *
-   * @param userPageVo 分页
+   * @param queryPage 查询条件和分页
    * @return 用户信息列表
    */
   @Override
-  public Result getUserList(UserPageVo userPageVo) {
-    try {
-      Page<UserListVo> page = new Page<>();
-      page.setSize(userPageVo.getPageSize());
-      page.setCurrent(userPageVo.getPageNum());
-      IPage<UserListVo> userList = userMapper.selectUserList(page);
-      return Result.success(userList);
-    } catch (Exception e) {
-      return Result.failure(e);
-    }
+  public PageResult getUserList(QueryPage<UserQueryDto> queryPage) {
+    IPage<UserListVo> page = new Page<>(queryPage.getPageNum(), queryPage.getPageSize());
+    List<UserListVo> userList =
+        userMapper.selectUserList(
+            page, queryPage.getQuery(), StrUtil.toUnderlineCase(queryPage.getSortBy()));
+    PageResult pageResult = new PageResult();
+    pageResult.setTotal((long) userList.size());
+    pageResult.setRecords(userList);
+    pageResult.setPages(page.getPages());
+    return pageResult;
   }
 
   /**
@@ -60,10 +67,8 @@ public class UserServiceImpl implements IUserService {
    * @return boolean
    */
   @Override
-  public Result addUserInfo(User user) {
+  public Result addUserInfo(SysUser user) {
     try {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      SysUser sysUser = (SysUser) authentication.getPrincipal();
       user.setUserId(UUID.randomUUID().toString());
       user.setCreateBy(sysUser.getUsername());
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
@@ -95,9 +100,7 @@ public class UserServiceImpl implements IUserService {
   @Override
   public Result delUserInfo(String userId) {
     try {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      SysUser sysUser = (SysUser) authentication.getPrincipal();
-      User user = new User();
+      SysUser user = new SysUser();
       user.setUserId(userId);
       user.setIsDeleted(1);
       user.setUpdateBy(sysUser.getUsername());
@@ -121,10 +124,8 @@ public class UserServiceImpl implements IUserService {
    * @return boolean
    */
   @Override
-  public Result updateUserInfo(User user) {
+  public Result updateUserInfo(SysUser user) {
     try {
-      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      SysUser sysUser = (SysUser) authentication.getPrincipal();
       user.setUpdateBy(sysUser.getUsername());
       user.setUpdateTime(
           new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));

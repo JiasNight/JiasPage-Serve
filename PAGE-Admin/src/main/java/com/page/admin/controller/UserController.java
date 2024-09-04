@@ -1,8 +1,12 @@
 package com.page.admin.controller;
 
-import com.page.admin.domain.entity.User;
-import com.page.admin.domain.vo.UserPageVo;
+import com.page.admin.domain.dto.UserQueryDto;
+import com.page.admin.domain.entity.SysUser;
+import com.page.admin.domain.vo.UserListVo;
 import com.page.admin.service.IUserService;
+import com.page.common.base.BaseController;
+import com.page.common.domain.PageResult;
+import com.page.common.domain.QueryPage;
 import com.page.common.utils.resultUtil.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,25 +14,26 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/system/user")
-public class UserController {
+public class UserController extends BaseController {
 
   @Autowired IUserService userService;
 
   @Operation(summary = "获取用户列表")
   @PostMapping("/list")
-  public Result getUserList(@RequestBody UserPageVo userPageVo) {
-    return userService.getUserList(userPageVo);
+  public Result getUserList(@RequestBody QueryPage<UserQueryDto> queryPage) {
+    PageResult userList = userService.getUserList(queryPage);
+    return Result.success(userList);
   }
 
   @Operation(summary = "用户新增")
   @PostMapping("/add")
-  public Result newAddUser(@RequestBody User user) {
+  public Result newAddUser(@RequestBody SysUser user) {
     return userService.addUserInfo(user);
   }
 
   @Operation(summary = "修改用户")
   @PostMapping("/update")
-  public Result updateUser(@RequestBody User user) {
+  public Result updateUser(@RequestBody SysUser user) {
     return userService.updateUserInfo(user);
   }
 
