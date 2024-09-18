@@ -19,9 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RoleServiceImpl implements IRoleService {
 
-  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-  SysUser sysUser = (SysUser) authentication.getPrincipal();
-
   @Autowired RoleMapper roleMapper;
 
   @Override
@@ -34,6 +31,8 @@ public class RoleServiceImpl implements IRoleService {
 
   @Override
   public Result addRoleInfo(Role role) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
       role.setId(UUID.randomUUID().toString());
@@ -56,6 +55,8 @@ public class RoleServiceImpl implements IRoleService {
 
   @Override
   public Result updateRoleInfo(Role roleInfo) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
       roleInfo.setUpdateTime(time);

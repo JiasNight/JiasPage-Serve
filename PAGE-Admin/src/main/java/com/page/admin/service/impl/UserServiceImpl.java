@@ -34,9 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl extends BaseService implements IUserService {
 
-  Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-  SysUser sysUser = (SysUser) authentication.getPrincipal();
-
   @Resource UserMapper userMapper;
 
   @Resource TransferConfiguration transferConfiguration;
@@ -68,6 +65,9 @@ public class UserServiceImpl extends BaseService implements IUserService {
    */
   @Override
   public Result addUserInfo(SysUser user) {
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       user.setUserId(UUID.randomUUID().toString());
       user.setCreateBy(sysUser.getUsername());
@@ -99,6 +99,9 @@ public class UserServiceImpl extends BaseService implements IUserService {
    */
   @Override
   public Result delUserInfo(String userId) {
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       SysUser user = new SysUser();
       user.setUserId(userId);
@@ -125,6 +128,9 @@ public class UserServiceImpl extends BaseService implements IUserService {
    */
   @Override
   public Result updateUserInfo(SysUser user) {
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       user.setUpdateBy(sysUser.getUsername());
       user.setUpdateTime(
