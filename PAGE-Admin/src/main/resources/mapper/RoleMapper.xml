@@ -25,6 +25,7 @@
                update_time
         from sys_role
         where is_deleted = '0'
+        order by create_time
     </select>
 
     <insert id="addRoleInfo">

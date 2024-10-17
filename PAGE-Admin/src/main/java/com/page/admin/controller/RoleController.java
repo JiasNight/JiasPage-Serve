@@ -25,6 +25,12 @@ public class RoleController {
     return Result.success(roleList);
   }
 
+  @PostMapping("/allList")
+  public Result getAllRoleList() {
+    PageResult<RoleListVo> roleList = roleService.getRoleList();
+    return Result.success(roleList);
+  }
+
   @PostMapping("/add")
   public Result addRole(@RequestBody Role role) {
     return roleService.addRoleInfo(role);
