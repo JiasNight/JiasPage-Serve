@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.page.admin.mapper.SysRoleMapper">
+    <resultMap id="roleMap" type="com.page.common.domain.entity.SysRole">
+        <result property="id" column="id"></result>
+        <result property="code" column="code"></result>
+        <result property="name" column="name"></result>
+        <result property="description" column="description"></result>
+        <result property="isDeleted" column="is_deleted"></result>
+        <result property="createBy" column="create_by"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
+    </resultMap>
+
+    <!-- 查询菜单列表-->
+    <select id="getRoleList" parameterType="string" resultType="com.page.admin.domain.vo.RoleListVO">
+        select id,
+        code,
+        name,
+        description,
+        create_by,
+        create_time,
+        update_by,
+        update_time
+        from sys_role
+        where is_deleted = '0'
+        order by create_time
+    </select>
+
+    <insert id="addRoleInfo">
+        insert into sys_role (id, code, name, description, is_deleted, create_by, create_time, update_by, update_time)
+        values (#{id}, #{code}, #{name}, #{description}, #{isDeleted}, #{createBy}, #{createTime}, #{updateBy},
+        #{updateTime})
+        <!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+        <!--            <if test="id != null and id != ''">`id`,</if>-->
+        <!--            <if test="code != null and code != ''">`code`,</if>-->
+        <!--            <if test="name != null and name != ''">`name`,</if>-->
+        <!--            <if test="description != null and description != ''">`description`,</if>-->
+        <!--            <if test="isDeleted != null and isDeleted != ''">is_deleted,</if>-->
+        <!--            <if test="createBy != null and createBy != ''">create_by,</if>-->
+        <!--            <if test="createTime != null and createTime != ''">create_time,</if>-->
+        <!--            <if test="updateBy != null and updateBy != ''">update_by,</if>-->
+        <!--            <if test="updateTime != null and updateTime != ''">update_time,</if>-->
+        <!--        </trim>-->
+        <!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+        <!--            <if test="id !== null and id != ''">#{id},</if>-->
+        <!--            <if test="code != null and code != ''">#{code},</if>-->
+        <!--            <if test="name != null and name != ''">#{name},</if>-->
+        <!--            <if test="description != null and description != ''">#{description},</if>-->
+        <!--            <if test="isDeleted != null and isDeleted != ''">#{isDeleted},</if>-->
+        <!--            <if test="createBy != null and createBy != ''">#{createBy},</if>-->
+        <!--            <if test="createTime != null and createTime != ''">#{createTime},</if>-->
+        <!--            <if test="updateBy != null and updateBy != ''">#{updateBby},</if>-->
+        <!--            <if test="updateTime != null and updateTime != ''">#{updateTime},</if>-->
+        <!--        </trim>-->
+    </insert>
+
+    <update id="updateRoleInfo" parameterType="com.page.common.domain.entity.SysRole">
+        update sys_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null">
+                `id` = #{id},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="delRoleInfo" parameterType="string">
+        update sys_role
+        set is_deleted='1'
+        where id = #{id}
+    </update>
+</mapper>

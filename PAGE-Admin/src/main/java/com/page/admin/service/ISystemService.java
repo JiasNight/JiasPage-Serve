@@ -1,9 +1,6 @@
 package com.page.admin.service;
 
-import com.page.admin.domain.vo.MenuVo;
 import com.page.common.utils.resultUtil.Result;
-
-import java.util.List;
 
 public interface ISystemService {
 
@@ -15,7 +12,5 @@ public interface ISystemService {
    */
   Result getRouterList();
 
-
   Result getRegionsById();
-
 }

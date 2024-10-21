@@ -2,7 +2,7 @@ package com.page.auth.service.impl;
 
 import com.page.auth.domain.MyUserDetails;
 import com.page.auth.service.IMyUserDetailsService;
-import com.page.auth.service.ISysUserService;
+import com.page.auth.service.ISystemUserService;
 import com.page.common.domain.entity.SysUser;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MyUserDetailsServiceImpl implements IMyUserDetailsService {
    *
    */
 
-  @Autowired ISysUserService sysUserService;
+  @Autowired ISystemUserService sysUserService;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
