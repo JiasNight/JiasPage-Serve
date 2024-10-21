@@ -1,8 +1,8 @@
 package com.page.auth.controller;
 
-import com.page.auth.domain.entity.SysUser;
 import com.page.auth.domain.vo.UserInfoVo;
 import com.page.auth.service.ISysUserService;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.resultUtil.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

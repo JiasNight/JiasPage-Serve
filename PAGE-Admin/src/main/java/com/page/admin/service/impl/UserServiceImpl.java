@@ -1,12 +1,9 @@
 package com.page.admin.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.page.admin.domain.dto.UserQueryDto;
-import com.page.admin.domain.entity.SysUser;
 import com.page.admin.domain.vo.UserListVo;
 import com.page.admin.mapper.UserMapper;
 import com.page.admin.service.IUserService;
@@ -14,6 +11,7 @@ import com.page.common.base.BaseService;
 import com.page.common.configuration.TransferConfiguration;
 import com.page.common.domain.PageResult;
 import com.page.common.domain.QueryPage;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.cryptionUtil.AesUtil;
 import com.page.common.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
@@ -69,7 +67,7 @@ public class UserServiceImpl extends BaseService implements IUserService {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
-      user.setUserId(UUID.randomUUID().toString());
+      // user.setUserId(UUID.randomUUID().toString());
       user.setCreateBy(sysUser.getUsername());
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
       user.setCreateTime(time);

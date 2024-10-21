@@ -1,7 +1,7 @@
 package com.page.auth.service;
 
-import com.page.auth.domain.entity.SysUser;
 import com.page.auth.domain.vo.UserInfoVo;
+import com.page.common.domain.entity.SysUser;
 
 public interface ISysUserService {
 

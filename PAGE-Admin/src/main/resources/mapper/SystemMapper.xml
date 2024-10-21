@@ -28,7 +28,7 @@
     </sql>
 
     <!-- 查询用户路由信息 -->
-    <select id="getRouterListByRole" parameterType="string" resultType="com.page.admin.domain.entity.Menu">
+    <select id="getRouterListByRole" parameterType="string" resultType="com.page.common.domain.entity.SysMenu">
         <include refid="selectMenuResultVo"/>
         <where>
             <if test="is_deleted != null  and is_deleted != ''"> and is_deleted = '0'</if>
@@ -36,13 +36,13 @@
     </select>
 
     <!-- 查询菜单列表-->
-    <select id="getMenuList" parameterType="string" resultType="com.page.admin.domain.entity.Menu">
+    <select id="getMenuList" parameterType="string" resultType="com.page.common.domain.entity.SysMenu">
         select *
         from sys_menu
         where is_deleted = '0'
     </select>
 
-    <insert id="addMenuInfo" parameterType="com.page.admin.domain.entity.Menu">
+    <insert id="addMenuInfo" parameterType="com.page.common.domain.entity.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null and id != ''">id,</if>
@@ -84,7 +84,7 @@
         </trim>
     </insert>
 
-    <update id="updateMenuInfo" parameterType="com.page.admin.domain.entity.Menu">
+    <update id="updateMenuInfo" parameterType="com.page.common.domain.entity.SysMenu">
         update sys_menu
         <trim prefix="SET" suffixOverrides=",">
             <if test="pid != null">pid = #{pid},</if>

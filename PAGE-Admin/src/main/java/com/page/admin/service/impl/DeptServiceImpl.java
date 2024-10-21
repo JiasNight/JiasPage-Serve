@@ -1,10 +1,10 @@
 package com.page.admin.service.impl;
 
-import com.page.admin.domain.entity.Dept;
 import com.page.admin.domain.vo.DeptVo;
 import com.page.admin.mapper.DeptMapper;
 import com.page.admin.service.IDeptService;
-import com.page.auth.domain.entity.SysUser;
+import com.page.common.domain.entity.SysDept;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ public class DeptServiceImpl implements IDeptService {
 
   @Override
   public Result getDeptData() {
-    List<Dept> deptList;
+    List<SysDept> deptList;
     try {
       deptList = deptMapper.getDeptData();
       // lambda表达式实现List接口sort方法排序
@@ -38,18 +38,18 @@ public class DeptServiceImpl implements IDeptService {
   }
 
   @Override
-  public Result addDeptInfo(Dept dept) {
+  public Result addDeptInfo(SysDept sysDept) {
     try {
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       SysUser sysUser = (SysUser) authentication.getPrincipal();
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
-      dept.setId(UUID.randomUUID().toString());
-      dept.setCreateBy(sysUser.getUsername());
-      dept.setCreateTime(time);
-      dept.setUpdateTime(time);
-      dept.setUpdateBy(sysUser.getUsername());
-      dept.setIsDeleted(0);
-      int i = deptMapper.addDeptInfo(dept);
+      // sysDept.setId(UUID.randomUUID().toString());
+      sysDept.setCreateBy(sysUser.getUsername());
+      sysDept.setCreateTime(time);
+      sysDept.setUpdateTime(time);
+      sysDept.setUpdateBy(sysUser.getUsername());
+      sysDept.setIsDeleted(0);
+      int i = deptMapper.addDeptInfo(sysDept);
       if (i > 0) {
         return Result.success();
       } else {
@@ -61,14 +61,14 @@ public class DeptServiceImpl implements IDeptService {
   }
 
   @Override
-  public Result updateDeptInfo(Dept dept) {
+  public Result updateDeptInfo(SysDept sysDept) {
     try {
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       SysUser sysUser = (SysUser) authentication.getPrincipal();
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
-      dept.setUpdateTime(time);
-      dept.setUpdateBy(sysUser.getUsername());
-      int i = deptMapper.updateDeptInfo(dept);
+      sysDept.setUpdateTime(time);
+      sysDept.setUpdateBy(sysUser.getUsername());
+      int i = deptMapper.updateDeptInfo(sysDept);
       if (i > 0) {
         return Result.success();
       } else {
@@ -99,23 +99,23 @@ public class DeptServiceImpl implements IDeptService {
    * @param list
    * @return
    */
-  public List<DeptVo> buildDeptTree(List<Dept> list) {
+  public List<DeptVo> buildDeptTree(List<SysDept> list) {
     List<DeptVo> treeList = new ArrayList();
     List<DeptVo> copyList = new ArrayList<DeptVo>();
     for (int i = 0; i < list.size(); i++) {
-      Dept dept = list.get(i);
+      SysDept sysDept = list.get(i);
       DeptVo deptVo = new DeptVo();
-      deptVo.setId(dept.getId());
-      deptVo.setPid(dept.getPid());
-      deptVo.setName(dept.getName());
-      deptVo.setCode(dept.getCode());
-      deptVo.setDescription(dept.getDescription());
-      deptVo.setOrder(dept.getOrder());
-      deptVo.setStatus(dept.getStatus());
-      deptVo.setCreateBy(dept.getCreateBy());
-      deptVo.setCreateTime(dept.getCreateTime());
-      deptVo.setUpdateBy(dept.getUpdateBy());
-      deptVo.setUpdateTime(dept.getUpdateTime());
+      deptVo.setId(sysDept.getId());
+      deptVo.setPid(sysDept.getPid());
+      deptVo.setName(sysDept.getName());
+      deptVo.setCode(sysDept.getCode());
+      deptVo.setDescription(sysDept.getDescription());
+      deptVo.setOrder(sysDept.getOrder());
+      deptVo.setStatus(sysDept.getStatus());
+      deptVo.setCreateBy(sysDept.getCreateBy());
+      deptVo.setCreateTime(sysDept.getCreateTime());
+      deptVo.setUpdateBy(sysDept.getUpdateBy());
+      deptVo.setUpdateTime(sysDept.getUpdateTime());
       copyList.add(deptVo);
     }
 

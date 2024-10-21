@@ -1,15 +1,13 @@
 package com.page.admin.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import com.page.admin.domain.entity.Menu;
 import com.page.admin.domain.vo.MenuMeta;
 import com.page.admin.domain.vo.MenuVo;
 import com.page.admin.mapper.MenuMapper;
 import com.page.admin.mapper.SystemMapper;
 import com.page.admin.service.ISystemService;
+import com.page.common.domain.entity.SysMenu;
 import com.page.common.utils.resultUtil.Result;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,7 @@ public class SystemServiceImpl implements ISystemService {
   @Override
   public Result getRouterList() {
     try {
-      List<Menu> mList = menuMapper.getRouterListByRole();
+      List<SysMenu> mList = menuMapper.getRouterListByRole();
       // lambda表达式实现List接口sort方法排序
       mList.sort(
               (m1, m2) -> {
@@ -38,36 +36,41 @@ public class SystemServiceImpl implements ISystemService {
     }
   }
 
+  @Override
+  public Result getRegionsById() {
+    return null;
+  }
+
   /**
    * 组装出菜单树结构
    *
    * @param list
    * @return
    */
-  public List<MenuVo> buildMenusTree(List<Menu> list) {
+  public List<MenuVo> buildMenusTree(List<SysMenu> list) {
     List<MenuVo> treeList = new ArrayList();
     List<MenuVo> copyList = new ArrayList<MenuVo>();
     for (int i = 0; i < list.size(); i++) {
-      Menu menu = list.get(i);
+      SysMenu sysMenu = list.get(i);
       MenuVo menuVo = new MenuVo();
       MenuMeta menuMeta = new MenuMeta();
-      menuMeta.setTitle(menu.getTitle());
-      menuMeta.setIcon(menu.getIcon());
-      menuMeta.setType(menu.getType());
-      menuMeta.setCache(menu.getCache());
-      menuMeta.setDisabled(menu.getDisabled());
-      menuMeta.setShow(menu.getShow());
-      menuMeta.setDescription(menu.getDescription());
-      menuVo.setId(menu.getId());
-      menuVo.setPid(menu.getPid());
-      menuVo.setName(menu.getName());
-      menuVo.setPath(menu.getPath());
+      menuMeta.setTitle(sysMenu.getTitle());
+      menuMeta.setIcon(sysMenu.getIcon());
+      menuMeta.setType(sysMenu.getType());
+      menuMeta.setCache(sysMenu.getCache());
+      menuMeta.setDisabled(sysMenu.getDisabled());
+      menuMeta.setShow(sysMenu.getShow());
+      menuMeta.setDescription(sysMenu.getDescription());
+      menuVo.setId(sysMenu.getId());
+      menuVo.setPid(sysMenu.getPid());
+      menuVo.setName(sysMenu.getName());
+      menuVo.setPath(sysMenu.getPath());
       menuVo.setMeta(menuMeta);
-      menuVo.setComponent(menu.getComponent());
-      menuVo.setOrder(menu.getOrder());
-      menuVo.setCreateBy(menu.getCreateBy());
-      menuVo.setCreateTime(menu.getCreateTime());
-      menuVo.setUpdateTime(menu.getUpdateTime());
+      menuVo.setComponent(sysMenu.getComponent());
+      menuVo.setOrder(sysMenu.getOrder());
+      menuVo.setCreateBy(sysMenu.getCreateBy());
+      menuVo.setCreateTime(sysMenu.getCreateTime());
+      menuVo.setUpdateTime(sysMenu.getUpdateTime());
       copyList.add(menuVo);
     }
 

@@ -3,11 +3,10 @@ package com.page.admin.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.page.admin.domain.dto.UserQueryDto;
-import com.page.admin.domain.entity.SysUser;
 import com.page.admin.domain.vo.UserListVo;
+import com.page.common.domain.entity.SysUser;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

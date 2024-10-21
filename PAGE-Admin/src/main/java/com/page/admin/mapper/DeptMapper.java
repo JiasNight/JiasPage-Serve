@@ -1,6 +1,6 @@
 package com.page.admin.mapper;
 
-import com.page.admin.domain.entity.Dept;
+import com.page.common.domain.entity.SysDept;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,11 +12,11 @@ public interface DeptMapper {
    * @param
    * @return
    */
-  List<Dept> getDeptData();
+  List<SysDept> getDeptData();
 
-  int addDeptInfo(Dept dept);
+  int addDeptInfo(SysDept sysDept);
 
-  int updateDeptInfo(Dept dept);
+  int updateDeptInfo(SysDept sysDept);
 
   int delDeptInfo(String dId);
 }

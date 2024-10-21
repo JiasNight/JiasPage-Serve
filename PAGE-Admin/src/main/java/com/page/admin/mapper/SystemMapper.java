@@ -1,9 +1,8 @@
 package com.page.admin.mapper;
 
-import com.page.admin.domain.entity.Menu;
-import org.apache.ibatis.annotations.Mapper;
-
+import com.page.common.domain.entity.SysMenu;
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface SystemMapper {
@@ -13,13 +12,13 @@ public interface SystemMapper {
    * @param
    * @return
    */
-  List<Menu> getRouterListByRole();
+  List<SysMenu> getRouterListByRole();
 
-  List<Menu> getMenuList();
+  List<SysMenu> getMenuList();
 
-  int addMenuInfo(Menu menu);
+  int addMenuInfo(SysMenu menu);
 
-  int updateMenuInfo(Menu menu);
+  int updateMenuInfo(SysMenu menu);
 
   int delMenuInfo(String mId);
 }

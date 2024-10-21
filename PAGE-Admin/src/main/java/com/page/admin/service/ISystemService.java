@@ -15,4 +15,7 @@ public interface ISystemService {
    */
   Result getRouterList();
 
+
+  Result getRegionsById();
+
 }

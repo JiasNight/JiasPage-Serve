@@ -1,13 +1,12 @@
 package com.page.auth.domain;
 
-import com.page.auth.domain.entity.SysUser;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import com.page.common.domain.entity.SysUser;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author JSON

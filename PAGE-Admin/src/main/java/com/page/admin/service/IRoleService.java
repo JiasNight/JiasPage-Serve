@@ -1,11 +1,9 @@
 package com.page.admin.service;
 
-import com.page.admin.domain.entity.Role;
 import com.page.admin.domain.vo.RoleListVo;
 import com.page.common.domain.PageResult;
+import com.page.common.domain.entity.SysRole;
 import com.page.common.utils.resultUtil.Result;
-
-import java.util.List;
 
 public interface IRoleService {
 
@@ -17,9 +15,9 @@ public interface IRoleService {
    */
   PageResult<RoleListVo> getRoleList();
 
-  Result addRoleInfo(Role role);
+  Result addRoleInfo(SysRole sysRole);
 
-  Result updateRoleInfo(Role role);
+  Result updateRoleInfo(SysRole sysRole);
 
   Result delRoleInfo(String rId);
 }

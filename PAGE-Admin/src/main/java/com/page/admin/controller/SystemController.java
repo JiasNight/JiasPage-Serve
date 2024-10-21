@@ -33,4 +33,9 @@ public class SystemController {
     return systemService.getRouterList();
   }
 
+  @GetMapping("/regions")
+  public Result getRegionsById() {
+    return systemService.getRegionsById();
+  }
+
 }

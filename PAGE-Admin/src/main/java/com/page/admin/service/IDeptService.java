@@ -1,7 +1,6 @@
 package com.page.admin.service;
 
-import com.page.admin.domain.entity.Dept;
-import com.page.admin.domain.entity.Role;
+import com.page.common.domain.entity.SysDept;
 import com.page.common.utils.resultUtil.Result;
 
 public interface IDeptService {
@@ -14,9 +13,9 @@ public interface IDeptService {
    */
   Result getDeptData();
 
-  Result addDeptInfo(Dept dept);
+  Result addDeptInfo(SysDept sysDept);
 
-  Result updateDeptInfo(Dept dept);
+  Result updateDeptInfo(SysDept sysDept);
 
   Result delDeptInfo(String dId);
 }

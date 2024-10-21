@@ -1,7 +1,6 @@
 package com.page.admin.domain.vo;
 
-import com.page.admin.domain.entity.Dept;
-
+import com.page.common.domain.entity.SysDept;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
  * @date 2024/7/9
  * @description
  */
-public class DeptVo extends Dept {
+public class DeptVo extends SysDept {
 
     /**
      * 子部门

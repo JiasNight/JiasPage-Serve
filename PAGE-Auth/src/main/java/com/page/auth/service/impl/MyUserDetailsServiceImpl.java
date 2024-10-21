@@ -1,18 +1,17 @@
 package com.page.auth.service.impl;
 
 import com.page.auth.domain.MyUserDetails;
-import com.page.auth.domain.entity.SysUser;
 import com.page.auth.service.IMyUserDetailsService;
 import com.page.auth.service.ISysUserService;
+import com.page.common.domain.entity.SysUser;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author JSON

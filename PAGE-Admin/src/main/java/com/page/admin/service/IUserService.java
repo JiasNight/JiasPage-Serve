@@ -1,10 +1,9 @@
 package com.page.admin.service;
 
 import com.page.admin.domain.dto.UserQueryDto;
-import com.page.admin.domain.entity.SysUser;
-import com.page.admin.domain.vo.UserListVo;
 import com.page.common.domain.PageResult;
 import com.page.common.domain.QueryPage;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.resultUtil.Result;
 
 public interface IUserService {

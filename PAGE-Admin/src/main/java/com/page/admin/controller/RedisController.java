@@ -1,17 +1,16 @@
 package com.page.admin.controller;
 
-import com.page.admin.domain.entity.SysUser;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.redisUtil.RedisUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Tag(name = "redis")

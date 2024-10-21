@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.page.admin.mapper.RoleMapper">
-    <resultMap id="roleMap" type="com.page.admin.domain.entity.Role">
+    <resultMap id="roleMap" type="com.page.common.domain.entity.SysRole">
         <result property="id" column="id"></result>
         <result property="code" column="code"></result>
         <result property="name" column="name"></result>
@@ -56,7 +56,7 @@
         <!--        </trim>-->
     </insert>
 
-    <update id="updateRoleInfo" parameterType="com.page.admin.domain.entity.Role">
+    <update id="updateRoleInfo" parameterType="com.page.common.domain.entity.SysRole">
         update sys_role
         <trim prefix="SET" suffixOverrides=",">
             <if test="id != null">

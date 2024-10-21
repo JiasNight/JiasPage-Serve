@@ -1,12 +1,11 @@
 package com.page.admin.controller;
 
 import com.page.admin.domain.dto.UserQueryDto;
-import com.page.admin.domain.entity.SysUser;
-import com.page.admin.domain.vo.UserListVo;
 import com.page.admin.service.IUserService;
 import com.page.common.base.BaseController;
 import com.page.common.domain.PageResult;
 import com.page.common.domain.QueryPage;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.resultUtil.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;

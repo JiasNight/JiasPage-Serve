@@ -13,7 +13,7 @@
         su.birthday,
         su.city_id,
         su.avatar,
-        su.remarks,
+        su.remark,
         su.`status`,
         su.create_time,
         su.create_by,
@@ -39,25 +39,25 @@
     </select>
 
     <!-- 添加用户-->
-    <insert id="addUserInfo" parameterType="com.page.admin.domain.entity.SysUser">
+    <insert id="addUserInfo" parameterType="com.page.common.domain.entity.SysUser">
         insert into sys_user(user_id, username, `password`, nickname, email, phone, gender, birthday, city_id, avatar,
-                             `status`, remarks, is_deleted, create_by, create_time, update_by, update_time)
+                             `status`, remark, is_deleted, create_by, create_time, update_by, update_time)
         values (#{userId}, #{username}, #{password}, #{nickname}, #{email}, #{phone}, #{gender},
-                #{birthday}, #{cityId}, #{avatar}, #{status}, #{remarks}, #{isDeleted}, #{createBy},
+                #{birthday}, #{cityId}, #{avatar}, #{status}, #{remark}, #{isDeleted}, #{createBy},
                 #{createTime},
                 #{updateBy},
                 #{updateTime})
     </insert>
 
     <!-- 删除用户-->
-    <update id="delUserInfo" parameterType="com.page.admin.domain.entity.SysUser">
+    <update id="delUserInfo" parameterType="com.page.common.domain.entity.SysUser">
         update sys_user
         set is_deleted=#{isDeleted}
         where user_id = #{userId}
     </update>
 
     <!-- 修改用户信息-->
-    <update id="updateUserInfo" parameterType="com.page.admin.domain.entity.SysUser">
+    <update id="updateUserInfo" parameterType="com.page.common.domain.entity.SysUser">
         update sys_user
         set username=#{username},
             nickname=#{nickname},
@@ -67,7 +67,7 @@
             birthday=#{birthday},
             city_id=#{cityId},
             avatar=#{avatar},
-            remarks=#{remarks},
+            remark=#{remark},
             `status`=#{status},
             update_by=#{updateBy},
             update_time=#{updateTime}
@@ -84,7 +84,7 @@
                birthday    as userBirthday,
                city_id     as userCity,
                avatar      as userAvatar,
-               remarks     as userMarks,
+               remark      as userRemark,
                create_time as createTime,
                update_time as updateTime
         from sys_user

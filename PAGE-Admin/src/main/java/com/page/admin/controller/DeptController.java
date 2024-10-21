@@ -1,12 +1,9 @@
 package com.page.admin.controller;
 
-import com.page.admin.domain.entity.Dept;
-import com.page.admin.domain.entity.Role;
 import com.page.admin.service.IDeptService;
-import com.page.admin.service.IRoleService;
+import com.page.common.domain.entity.SysDept;
 import com.page.common.utils.resultUtil.Result;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,13 +19,13 @@ public class DeptController {
   }
 
   @PostMapping("/add")
-  public Result addDept(@RequestBody Dept dept) {
-      return deptService.addDeptInfo(dept);
+  public Result addDept(@RequestBody SysDept sysDept) {
+      return deptService.addDeptInfo(sysDept);
   }
 
   @PostMapping("/update")
-  public Result updateDept(@RequestBody Dept dept) {
-    return deptService.updateDeptInfo(dept);
+  public Result updateDept(@RequestBody SysDept sysDept) {
+    return deptService.updateDeptInfo(sysDept);
   }
 
   @GetMapping("/delete/{dId}")

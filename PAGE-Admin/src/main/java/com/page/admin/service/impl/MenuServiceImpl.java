@@ -1,10 +1,10 @@
 package com.page.admin.service.impl;
 
-import com.page.admin.domain.entity.Menu;
 import com.page.admin.domain.vo.MenuMeta;
 import com.page.admin.domain.vo.MenuVo;
 import com.page.admin.mapper.MenuMapper;
 import com.page.admin.service.IMenuService;
+import com.page.common.domain.entity.SysMenu;
 import com.page.common.utils.resultUtil.Result;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,7 +21,7 @@ public class MenuServiceImpl implements IMenuService {
   @Override
   public Result getRouterList() {
     try {
-      List<Menu> mList = menuMapper.getRouterListByRole();
+      List<SysMenu> mList = menuMapper.getRouterListByRole();
       // lambda表达式实现List接口sort方法排序
       mList.sort(
           (m1, m2) -> {
@@ -37,7 +37,7 @@ public class MenuServiceImpl implements IMenuService {
   @Override
   public Result getMenuList() {
     try {
-      List<Menu> mList = menuMapper.getMenuList();
+      List<SysMenu> mList = menuMapper.getMenuList();
       // lambda表达式实现List接口sort方法排序
       mList.sort(
           (m1, m2) -> {
@@ -53,7 +53,7 @@ public class MenuServiceImpl implements IMenuService {
   @Override
   public Result addMenuInfo(MenuVo menuInfo) {
     try {
-      Menu menu = new Menu();
+      SysMenu menu = new SysMenu();
       MenuMeta menuMeta = menuInfo.getMeta();
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
       menu.setPath(menuInfo.getPath());
@@ -88,25 +88,25 @@ public class MenuServiceImpl implements IMenuService {
   @Override
   public Result updateMenuInfo(MenuVo menuInfo) {
     try {
-      Menu menu = new Menu();
+      SysMenu sysMenu = new SysMenu();
       MenuMeta menuMeta = menuInfo.getMeta();
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
-      menu.setId(menuInfo.getId());
-      menu.setPath(menuInfo.getPath());
-      menu.setName(menuInfo.getName());
-      menu.setPid(menuInfo.getPid());
-      menu.setOrder(menuInfo.getOrder());
-      menu.setComponent(menuInfo.getComponent());
-      menu.setIcon(menuMeta.getIcon());
-      menu.setTitle(menuMeta.getTitle());
-      menu.setType(menuMeta.getType());
-      menu.setShow(menuMeta.getShow());
-      menu.setDisabled(menuMeta.getDisabled());
-      menu.setCache(menuMeta.getCache());
-      menu.setDescription(menuMeta.getDescription());
-      menu.setDisabled(menuMeta.getDisabled());
-      menu.setUpdateTime(time);
-      int i = menuMapper.updateMenuInfo(menu);
+      sysMenu.setId(menuInfo.getId());
+      sysMenu.setPath(menuInfo.getPath());
+      sysMenu.setName(menuInfo.getName());
+      sysMenu.setPid(menuInfo.getPid());
+      sysMenu.setOrder(menuInfo.getOrder());
+      sysMenu.setComponent(menuInfo.getComponent());
+      sysMenu.setIcon(menuMeta.getIcon());
+      sysMenu.setTitle(menuMeta.getTitle());
+      sysMenu.setType(menuMeta.getType());
+      sysMenu.setShow(menuMeta.getShow());
+      sysMenu.setDisabled(menuMeta.getDisabled());
+      sysMenu.setCache(menuMeta.getCache());
+      sysMenu.setDescription(menuMeta.getDescription());
+      sysMenu.setDisabled(menuMeta.getDisabled());
+      sysMenu.setUpdateTime(time);
+      int i = menuMapper.updateMenuInfo(sysMenu);
       if (i > 0) {
         return Result.success();
       } else {
@@ -137,11 +137,11 @@ public class MenuServiceImpl implements IMenuService {
    * @param list
    * @return
    */
-  public List<MenuVo> buildMenusTree(List<Menu> list) {
+  public List<MenuVo> buildMenusTree(List<SysMenu> list) {
     List<MenuVo> treeList = new ArrayList();
     List<MenuVo> copyList = new ArrayList<MenuVo>();
     for (int i = 0; i < list.size(); i++) {
-      Menu menu = list.get(i);
+      SysMenu menu = list.get(i);
       MenuVo menuVo = new MenuVo();
       MenuMeta menuMeta = new MenuMeta();
       menuMeta.setTitle(menu.getTitle());

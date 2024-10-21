@@ -15,7 +15,7 @@
     <!--    </resultMap>-->
 
     <!-- 查询菜单列表-->
-    <select id="getDeptData" parameterType="string" resultType="com.page.admin.domain.entity.Dept">
+    <select id="getDeptData" parameterType="string" resultType="com.page.common.domain.entity.SysDept">
         select id,
                pid,
                code,
@@ -38,7 +38,7 @@
                 #{createTime}, #{updateBy}, #{updateTime})
     </insert>
 
-    <update id="updateDeptInfo" parameterType="com.page.admin.domain.entity.Dept">
+    <update id="updateDeptInfo" parameterType="com.page.common.domain.entity.SysDept">
         update sys_dept
         <trim prefix="SET" suffixOverrides=",">
             <if test="pid != null">pid = #{pid},</if>

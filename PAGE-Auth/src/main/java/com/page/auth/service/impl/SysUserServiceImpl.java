@@ -1,11 +1,11 @@
 package com.page.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.page.auth.domain.entity.SysUser;
 import com.page.auth.domain.vo.UserInfoVo;
 import com.page.auth.mapper.SysUserMapper;
 import com.page.auth.service.ISysUserService;
 import com.page.common.configuration.TransferConfiguration;
+import com.page.common.domain.entity.SysUser;
 import com.page.common.utils.jwtUtil.JwtUtil;
 import com.page.common.utils.redisUtil.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
