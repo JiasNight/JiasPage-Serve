@@ -1,10 +1,12 @@
 package com.page.admin.service.impl;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.page.admin.domain.dto.UserInfoDTO;
 import com.page.admin.domain.dto.UserQueryDTO;
+import com.page.admin.domain.dto.UserRolesDTO;
 import com.page.admin.domain.vo.UserListVO;
 import com.page.admin.mapper.SysUserMapper;
 import com.page.admin.mapper.SysUserRoleMapper;
@@ -89,6 +91,8 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
       if (hasList.size() > 0) {
         return Result.failure("该用户账号已经注册！");
       }
+      String userId = UUID.randomUUID().toString();
+      user.setUserId(userId);
       user.setCreateBy(sysUser.getUsername());
       String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
       user.setCreateTime(time);
@@ -152,9 +156,28 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
     SysUser sysUser = (SysUser) authentication.getPrincipal();
     try {
       SysUser user = new SysUser();
-      String curUserId = userInfoDTO.getUserId();
-      user.setUserId(curUserId);
-      String[] roles = userInfoDTO.getRoles();
+      BeanUtils.copyProperties(userInfoDTO, user);
+      user.setUpdateBy(sysUser.getUsername());
+      user.setUpdateTime(
+          new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+      int i = sysUserMapper.updateUserInfo(user);
+      if (i > 0) {
+        return Result.success();
+      } else {
+        return Result.failure();
+      }
+    } catch (Exception e) {
+      return Result.failure(e);
+    }
+  }
+
+  @Override
+  public Result modifyUserInfo(UserRolesDTO userRolesDTO) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    SysUser sysUser = (SysUser) authentication.getPrincipal();
+    try {
+      String curUserId = userRolesDTO.getUserId();
+      String[] roles = userRolesDTO.getRoles();
       // 删除该用户id绑定的角色
       sysUserRoleMapper.deleteRolesByUserId(curUserId);
       List userRoleList = new ArrayList();
@@ -170,12 +193,7 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
         userRoleList.add(sysUserRole);
       }
-      sysUserRoleMapper.batchInsertUserRole(userRoleList);
-      BeanUtils.copyProperties(userInfoDTO, user);
-      user.setUpdateBy(sysUser.getUsername());
-      user.setUpdateTime(
-          new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
-      int i = sysUserMapper.updateUserInfo(user);
+      int i = sysUserRoleMapper.batchInsertUserRole(userRoleList);
       if (i > 0) {
         return Result.success();
       } else {

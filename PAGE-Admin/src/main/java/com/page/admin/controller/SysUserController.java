@@ -2,6 +2,7 @@ package com.page.admin.controller;
 
 import com.page.admin.domain.dto.UserInfoDTO;
 import com.page.admin.domain.dto.UserQueryDTO;
+import com.page.admin.domain.dto.UserRolesDTO;
 import com.page.admin.service.ISysUserService;
 import com.page.common.base.BaseController;
 import com.page.common.domain.PageResult;
@@ -31,10 +32,16 @@ public class SysUserController extends BaseController {
     return userService.addUserInfo(user);
   }
 
-  @Operation(summary = "修改用户")
+  @Operation(summary = "修改用户信息")
   @PostMapping("/update")
   public Result updateUser(@RequestBody UserInfoDTO userInfoDTO) {
     return userService.updateUserInfo(userInfoDTO);
+  }
+
+  @Operation(summary = "修改用户角色")
+  @PostMapping("/modify/roles")
+  public Result modifyUserRoles(@RequestBody UserRolesDTO userRolesDTO) {
+    return userService.modifyUserInfo(userRolesDTO);
   }
 
   @Operation(summary = "删除用户")

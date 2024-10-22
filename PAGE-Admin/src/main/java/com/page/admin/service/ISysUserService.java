@@ -2,6 +2,7 @@ package com.page.admin.service;
 
 import com.page.admin.domain.dto.UserInfoDTO;
 import com.page.admin.domain.dto.UserQueryDTO;
+import com.page.admin.domain.dto.UserRolesDTO;
 import com.page.common.domain.PageResult;
 import com.page.common.domain.QueryPage;
 import com.page.common.domain.entity.SysUser;
@@ -36,10 +37,18 @@ public interface ISysUserService {
   /**
    * 修改用户
    *
-   * @param user 用户实体
+   * @param userInfoDTO 用户信息
    * @return boolean
    */
   Result updateUserInfo(UserInfoDTO userInfoDTO);
+
+  /**
+   * 修改用户的角色
+   *
+   * @param userRolesDTO
+   * @return
+   */
+  Result modifyUserInfo(UserRolesDTO userRolesDTO);
 
   /**
    * 查询用户信息
